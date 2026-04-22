@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评价对象"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="是否赴约？"
+        android:layout_marginBottom="4dp" />
+
+    <RadioGroup
+        android:id="@+id/rg_attend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+        <RadioButton
+            android:id="@+id/rb_attend_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是"
+            android:checked="true" />
+        <RadioButton
+            android:id="@+id/rb_attend_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="否" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评价？"
+        android:layout_marginBottom="4dp" />
+
+    <RadioGroup
+        android:id="@+id/rg_praise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+        <RadioButton
+            android:id="@+id/rb_praise_good"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好评"
+            android:checked="true" />
+        <RadioButton
+            android:id="@+id/rb_praise_bad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="差评" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提 交" />
+</LinearLayout>
