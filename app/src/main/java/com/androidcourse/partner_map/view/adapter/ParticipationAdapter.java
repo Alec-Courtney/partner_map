@@ -28,7 +28,9 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
     }
 
     public ParticipationAdapter() {
-        this(null, null, null);
+        this.data = null;
+        this.actionListener = null;
+        this.itemListener = null;
     }
 
     public ParticipationAdapter(List<Participation> data, OnActionListener listener) {
