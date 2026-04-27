@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.androidcourse.partner_map.R;
+import com.androidcourse.partner_map.data.remote.WebSocketManager;
 import com.androidcourse.partner_map.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         viewModel.login(nickname, password).observe(this, resource -> {
             if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS) {
+                WebSocketManager.getInstance().connect(resource.data.getToken());
                 startMain();
             } else if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.ERROR) {
                 Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show();

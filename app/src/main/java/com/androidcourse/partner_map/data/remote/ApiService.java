@@ -27,10 +27,10 @@ public interface ApiService {
     @POST("auth/login")
     Call<ApiResponse<User>> login(@Body Map<String, Object> body);
 
-    @GET("user/me")
+    @GET("auth/me")
     Call<ApiResponse<User>> getCurrentUser();
 
-    @GET("user/{userId}")
+    @GET("users/{userId}")
     Call<ApiResponse<User>> getUser(@Path("userId") String userId);
 
     @GET("schools")
@@ -56,6 +56,9 @@ public interface ApiService {
 
     @GET("requests/{requestId}")
     Call<ApiResponse<PartnerRequest>> getRequestDetail(@Path("requestId") String requestId);
+
+    @POST("requests/{requestId}/participate")
+    Call<ApiResponse<java.util.Map<String, Object>>> participate(@Path("requestId") String requestId);
 
     @POST("requests/{requestId}/cancel")
     Call<ApiResponse<Void>> cancelRequest(@Path("requestId") String requestId);

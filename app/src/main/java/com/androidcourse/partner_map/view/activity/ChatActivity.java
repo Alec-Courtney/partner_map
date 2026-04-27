@@ -20,9 +20,11 @@ import com.androidcourse.partner_map.viewmodel.ChatViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
     public static final String EXTRA_REQUEST_ID = "request_id";
+    public static final String EXTRA_CHAT_ROOM_ID = "chat_room_id";
     public static final String EXTRA_PUBLISHER_ID = "publisher_id";
     public static final String EXTRA_PUBLISHER_NAME = "publisher_name";
 
@@ -42,11 +44,11 @@ public class ChatActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         String requestId = getIntent().getStringExtra(EXTRA_REQUEST_ID);
+        String chatRoomId = getIntent().getStringExtra(EXTRA_CHAT_ROOM_ID);
         String publisherId = getIntent().getStringExtra(EXTRA_PUBLISHER_ID);
         String publisherName = getIntent().getStringExtra(EXTRA_PUBLISHER_NAME);
         currentUserId = SharedPreferencesUtil.getInstance(this).getString("user_id", "");
         isPublisher = currentUserId.equals(publisherId);
-        roomId = requestId + "_" + currentUserId; // simplified
 
         ImageView ivBack = findViewById(R.id.iv_back);
         TextView tvTitle = findViewById(R.id.tv_title);
@@ -62,7 +64,26 @@ public class ChatActivity extends AppCompatActivity {
         ivBack.setOnClickListener(v -> finish());
         btnSend.setOnClickListener(v -> sendMessage());
 
-        loadMessages();
+        if (chatRoomId != null && !chatRoomId.isEmpty()) {
+            roomId = chatRoomId;
+            loadMessages();
+        } else if (requestId != null) {
+            joinChatRoom(requestId);
+        }
+    }
+
+    private void joinChatRoom(String requestId) {
+        viewModel.participate(requestId).observe(this, resource -> {
+            if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS
+                    && resource.data != null) {
+                Object chatRoomIdObj = resource.data.get("chatRoomId");
+                roomId = chatRoomIdObj != null ? chatRoomIdObj.toString() : (requestId + "_" + currentUserId);
+                loadMessages();
+            } else {
+                Toast.makeText(this, "加入聊天失败: " + resource.message, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 
     private void loadMessages() {

@@ -81,7 +81,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         tvLocation.setText(String.format("地点: %.4f, %.4f", req.getRequestLat(), req.getRequestLng()));
         tvTime.setText("时间: " + TimeUtil.formatDateTime(req.getScheduledTime()));
         tvPeople.setText(String.format("人数: %d/%d", req.getCurrentParticipants(), req.getMaxParticipants()));
-        tvGender.setText("性别: " + (req.getGenderRequirement() == null || req.getGenderRequirement().isEmpty() ? "不限" : req.getGenderRequirement()));
+        tvGender.setText("性别: " + getGenderRequirementLabel(req.getGenderRequirement()));
         tvCost.setText("费用: " + (req.getCostDescription() == null || req.getCostDescription().isEmpty() ? "未说明" : req.getCostDescription()));
         tvDesc.setText(req.getDescription());
 
@@ -122,6 +122,14 @@ public class RequestDetailActivity extends AppCompatActivity {
                 intent.putExtra(ChatActivity.EXTRA_PUBLISHER_NAME, currentRequest.getPublisherName());
                 startActivity(intent);
             }
+        }
+    }
+
+    private String getGenderRequirementLabel(int requirement) {
+        switch (requirement) {
+            case 1: return "仅男";
+            case 2: return "仅女";
+            default: return "不限";
         }
     }
 }

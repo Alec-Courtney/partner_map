@@ -9,6 +9,7 @@ public class User {
     private String gender;
     private float attendRate;
     private float praiseRate;
+    private String token;
 
     public User() {}
 
@@ -35,4 +36,7 @@ public class User {
 
     public float getPraiseRate() { return praiseRate; }
     public void setPraiseRate(float praiseRate) { this.praiseRate = praiseRate; }
+
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 }

@@ -37,7 +37,7 @@ public class UserRepository {
                 retrofit2.Response<ApiResponse<User>> response = apiClient.getApiService().login(body).execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     User user = response.body().getData();
-                    String token = user.getUserId(); // mock token as userId for demo
+                    String token = user.getToken() != null ? user.getToken() : user.getUserId();
                     apiClient.setToken(token);
                     prefs.putString(Constants.KEY_TOKEN, token);
                     prefs.putString(Constants.KEY_USER_ID, user.getUserId());
@@ -67,7 +67,13 @@ public class UserRepository {
                 body.put("avatar", avatar);
                 retrofit2.Response<ApiResponse<User>> response = apiClient.getApiService().register(body).execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    result.postValue(Resource.success(response.body().getData()));
+                    User regUser = response.body().getData();
+                    String token = regUser.getToken() != null ? regUser.getToken() : regUser.getUserId();
+                    apiClient.setToken(token);
+                    prefs.putString(Constants.KEY_TOKEN, token);
+                    prefs.putString(Constants.KEY_USER_ID, regUser.getUserId());
+                    prefs.putObject(Constants.KEY_USER_JSON, regUser);
+                    result.postValue(Resource.success(regUser));
                 } else {
                     String msg = response.body() != null ? response.body().getMessage() : "注册失败";
                     result.postValue(Resource.error(msg, null));

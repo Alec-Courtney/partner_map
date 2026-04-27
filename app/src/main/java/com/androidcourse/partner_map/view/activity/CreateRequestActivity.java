@@ -142,9 +142,9 @@ public class CreateRequestActivity extends AppCompatActivity {
         req.setExpireBeforeMin(expireBeforeMin);
 
         int genderId = rgGender.getCheckedRadioButtonId();
-        if (genderId == R.id.rb_male_only) req.setGenderRequirement("男");
-        else if (genderId == R.id.rb_female_only) req.setGenderRequirement("女");
-        else req.setGenderRequirement("不限");
+        if (genderId == R.id.rb_male_only) req.setGenderRequirement(1);
+        else if (genderId == R.id.rb_female_only) req.setGenderRequirement(2);
+        else req.setGenderRequirement(0);
 
         String cost = etCost.getText().toString().trim();
         req.setCostDescription(cost.isEmpty() ? null : cost);

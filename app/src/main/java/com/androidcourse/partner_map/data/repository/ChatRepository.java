@@ -20,6 +20,25 @@ public class ChatRepository {
         apiClient = ApiClient.getInstance();
     }
 
+    public LiveData<Resource<Map<String, Object>>> participate(String requestId) {
+        MutableLiveData<Resource<Map<String, Object>>> result = new MutableLiveData<>();
+        result.setValue(Resource.loading(null));
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                retrofit2.Response<ApiResponse<Map<String, Object>>> response =
+                        apiClient.getApiService().participate(requestId).execute();
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    result.postValue(Resource.success(response.body().getData()));
+                } else {
+                    result.postValue(Resource.error("参与失败", null));
+                }
+            } catch (Exception e) {
+                result.postValue(Resource.error("网络错误", null));
+            }
+        });
+        return result;
+    }
+
     public LiveData<Resource<List<ChatRoom>>> getChatRooms() {
         MutableLiveData<Resource<List<ChatRoom>>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));

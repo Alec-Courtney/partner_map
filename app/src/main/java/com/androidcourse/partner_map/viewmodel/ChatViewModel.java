@@ -11,6 +11,7 @@ import com.androidcourse.partner_map.data.repository.Resource;
 import com.androidcourse.partner_map.model.ChatMessage;
 
 import java.util.List;
+import java.util.Map;
 
 public class ChatViewModel extends ViewModel {
     private final ChatRepository chatRepository;
@@ -25,6 +26,10 @@ public class ChatViewModel extends ViewModel {
             // In real app, parse payload to ChatMessage
         };
         WebSocketManager.getInstance().addMessageListener(messageListener);
+    }
+
+    public LiveData<Resource<Map<String, Object>>> participate(String requestId) {
+        return chatRepository.participate(requestId);
     }
 
     public LiveData<Resource<List<ChatMessage>>> loadMessages(String roomId) {

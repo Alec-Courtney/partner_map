@@ -19,7 +19,7 @@ public class PartnerRequest {
     private int currentParticipants;
     private long scheduledTime;
     private int expireBeforeMin;
-    private String genderRequirement;
+    private int genderRequirement; // 0=不限, 1=仅男, 2=仅女
     private String costDescription;
     private int status; // 0=招募中, 1=已满员, 2=已结束
     private long createdAt;
@@ -76,8 +76,8 @@ public class PartnerRequest {
     public int getExpireBeforeMin() { return expireBeforeMin; }
     public void setExpireBeforeMin(int expireBeforeMin) { this.expireBeforeMin = expireBeforeMin; }
 
-    public String getGenderRequirement() { return genderRequirement; }
-    public void setGenderRequirement(String genderRequirement) { this.genderRequirement = genderRequirement; }
+    public int getGenderRequirement() { return genderRequirement; }
+    public void setGenderRequirement(int genderRequirement) { this.genderRequirement = genderRequirement; }
 
     public String getCostDescription() { return costDescription; }
     public void setCostDescription(String costDescription) { this.costDescription = costDescription; }

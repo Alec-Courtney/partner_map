@@ -59,7 +59,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 holder.btnAction2.setText("取消");
                 holder.btnAction1.setOnClickListener(v -> listener.onEdit(item));
                 holder.btnAction2.setOnClickListener(v -> listener.onCancel(item));
-            } else if (item.getStatus() == 2) {
+            } else if (item.getStatus() == 1) {
                 holder.btnAction1.setText("查看");
                 holder.btnAction2.setText("标记完成");
                 holder.btnAction1.setOnClickListener(v -> listener.onView(item));
