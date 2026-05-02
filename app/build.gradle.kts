@@ -51,6 +51,9 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.recyclerview)
 
+    implementation(libs.amap.map)
+    implementation(libs.amap.location)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

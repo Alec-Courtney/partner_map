@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(GIT_AUTHOR_DATE=\"2026-04-18T10:00:00 +0800\" GIT_COMMITTER_DATE=\"2026-04-18T10:00:00 +0800\" git add app/src/main/java/com/androidcourse/partner_map/data/)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

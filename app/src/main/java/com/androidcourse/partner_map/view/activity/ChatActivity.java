@@ -56,7 +56,8 @@ public class ChatActivity extends AppCompatActivity {
         etInput = findViewById(R.id.et_input);
         Button btnSend = findViewById(R.id.btn_send);
 
-        tvTitle.setText("与 " + publisherName + " 的对话");
+        String displayTitle = publisherName != null ? publisherName : "对方";
+        tvTitle.setText("与 " + displayTitle + " 的对话");
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChatMessageAdapter(messages, currentUserId, isPublisher);
         rvMessages.setAdapter(adapter);

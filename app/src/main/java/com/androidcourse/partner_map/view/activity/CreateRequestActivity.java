@@ -110,11 +110,19 @@ public class CreateRequestActivity extends AppCompatActivity {
     }
 
     private void pickLocation() {
-        // In real app: open map to select point
-        // Mock: use current location
-        requestLat = publishLat;
-        requestLng = publishLng;
-        tvRequestLocation.setText("已选择当前位置");
+        new LocationHelper(this).getCurrentLocation(new LocationHelper.LocationCallback() {
+            @Override
+            public void onLocationResult(double lat, double lng) {
+                requestLat = lat;
+                requestLng = lng;
+                tvRequestLocation.setText(String.format("已选择位置: %.4f, %.4f", lat, lng));
+            }
+
+            @Override
+            public void onLocationError(String error) {
+                Toast.makeText(CreateRequestActivity.this, "定位失败: " + error + "，请稍后重试", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void publish() {
@@ -126,6 +134,10 @@ public class CreateRequestActivity extends AppCompatActivity {
         }
         if (selectedCategory < 0) {
             Toast.makeText(this, "请选择分类", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (requestLat == 0 && requestLng == 0) {
+            Toast.makeText(this, "请选择需求位置", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -95,7 +95,45 @@ public class RequestDetailActivity extends AppCompatActivity {
         layoutPublisherActions.setVisibility(isPublisher ? android.view.View.VISIBLE : android.view.View.GONE);
 
         if (isPublisher) {
-            btnAction.setText("管理需求");
+            Button btnEdit = findViewById(R.id.btn_edit);
+            Button btnDelete = findViewById(R.id.btn_delete);
+            if (req.getStatus() == 0) {
+                btnAction.setText("管理需求");
+                btnEdit.setVisibility(android.view.View.VISIBLE);
+                btnDelete.setVisibility(android.view.View.VISIBLE);
+                btnEdit.setOnClickListener(v -> {
+                    Toast.makeText(this, "编辑功能开发中", Toast.LENGTH_SHORT).show();
+                });
+                btnDelete.setOnClickListener(v -> {
+                    viewModel.cancelRequest(req.getRequestId()).observe(this, resource -> {
+                        if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS) {
+                            Toast.makeText(this, "已取消", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.ERROR) {
+                            Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
+            } else if (req.getStatus() == 1) {
+                btnAction.setText("标记完成");
+                btnEdit.setVisibility(android.view.View.GONE);
+                btnDelete.setVisibility(android.view.View.GONE);
+                btnAction.setOnClickListener(v -> {
+                    viewModel.completeRequest(req.getRequestId()).observe(this, resource -> {
+                        if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS) {
+                            Toast.makeText(this, "已标记完成", Toast.LENGTH_SHORT).show();
+                            loadDetail();
+                        } else if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.ERROR) {
+                            Toast.makeText(this, resource.message, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
+            } else {
+                btnAction.setText("已结束");
+                btnAction.setEnabled(false);
+                btnEdit.setVisibility(android.view.View.GONE);
+                btnDelete.setVisibility(android.view.View.GONE);
+            }
         } else {
             if (req.getStatus() == 0) {
                 btnAction.setText("私信发起者");
@@ -113,7 +151,14 @@ public class RequestDetailActivity extends AppCompatActivity {
         if (currentRequest == null) return;
         boolean isPublisher = currentUserId.equals(currentRequest.getPublisherId());
         if (isPublisher) {
-            // publisher actions handled by buttons in layout
+            if (currentRequest.getStatus() == 1) {
+                viewModel.completeRequest(currentRequest.getRequestId()).observe(this, resource -> {
+                    if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS) {
+                        Toast.makeText(this, "已标记完成", Toast.LENGTH_SHORT).show();
+                        loadDetail();
+                    }
+                });
+            }
         } else {
             if (currentRequest.getStatus() == 0) {
                 Intent intent = new Intent(this, ChatActivity.class);

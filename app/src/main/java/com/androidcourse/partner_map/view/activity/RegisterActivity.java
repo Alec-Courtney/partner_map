@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.androidcourse.partner_map.R;
+import com.androidcourse.partner_map.data.remote.WebSocketManager;
 import com.androidcourse.partner_map.model.School;
 import com.androidcourse.partner_map.viewmodel.RegisterViewModel;
 
@@ -90,6 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
         viewModel.register(nickname, password, gender, schoolId, null).observe(this, resource -> {
             if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS) {
                 Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+                String token = resource.data.getToken() != null ? resource.data.getToken() : resource.data.getUserId();
+                WebSocketManager.getInstance().connect(token);
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.ERROR) {

@@ -13,6 +13,8 @@ okhttp = "4.12.0"
 gson = "2.11.0"
 glide = "4.16.0"
 recyclerview = "1.4.0"
+amapMap = "6.0.0"
+amapLocation = "11.1.200"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +32,8 @@ okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhtt
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+amap-map = { group = "com.amap.api", name = "map2d", version.ref = "amapMap" }
+amap-location = { group = "com.amap.api", name = "location", version.ref = "amapLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

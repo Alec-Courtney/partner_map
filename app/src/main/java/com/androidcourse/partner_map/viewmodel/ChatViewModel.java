@@ -10,6 +10,8 @@ import com.androidcourse.partner_map.data.repository.EvaluationRepository;
 import com.androidcourse.partner_map.data.repository.Resource;
 import com.androidcourse.partner_map.model.ChatMessage;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +25,15 @@ public class ChatViewModel extends ViewModel {
         chatRepository = new ChatRepository();
         evaluationRepository = new EvaluationRepository();
         messageListener = (type, payload) -> {
-            // In real app, parse payload to ChatMessage
+            try {
+                Gson gson = new Gson();
+                ChatMessage message = gson.fromJson(payload, ChatMessage.class);
+                if (message != null) {
+                    newMessage.postValue(message);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         };
         WebSocketManager.getInstance().addMessageListener(messageListener);
     }
