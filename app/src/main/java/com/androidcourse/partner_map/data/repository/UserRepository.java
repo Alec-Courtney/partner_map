@@ -116,6 +116,33 @@ public class UserRepository {
         return prefs.getObject(Constants.KEY_USER_JSON, User.class);
     }
 
+    public LiveData<Resource<User>> getCurrentUser() {
+        MutableLiveData<Resource<User>> result = new MutableLiveData<>();
+        result.setValue(Resource.loading(getCachedUser()));
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                retrofit2.Response<ApiResponse<User>> response = apiClient.getApiService().getCurrentUser().execute();
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    User user = response.body().getData();
+                    if (user != null) {
+                        User cached = getCachedUser();
+                        if (cached != null && (user.getToken() == null || user.getToken().isEmpty())) {
+                            user.setToken(cached.getToken());
+                        }
+                        prefs.putObject(Constants.KEY_USER_JSON, user);
+                    }
+                    result.postValue(Resource.success(user));
+                } else {
+                    String msg = response.body() != null ? response.body().getMessage() : "加载失败";
+                    result.postValue(Resource.error(msg, getCachedUser()));
+                }
+            } catch (Exception e) {
+                result.postValue(Resource.error("网络错误", getCachedUser()));
+            }
+        });
+        return result;
+    }
+
     public boolean isLoggedIn() {
         return prefs.getString(Constants.KEY_TOKEN, null) != null;
     }

@@ -64,6 +64,17 @@ public class ChatActivity extends AppCompatActivity {
 
         ivBack.setOnClickListener(v -> finish());
         btnSend.setOnClickListener(v -> sendMessage());
+        viewModel.getNewMessage().observe(this, message -> {
+            if (message == null || roomId == null) {
+                return;
+            }
+            if (!roomId.equals(message.getChatRoomId())) {
+                return;
+            }
+            messages.add(message);
+            adapter.notifyItemInserted(messages.size() - 1);
+            rvMessages.scrollToPosition(messages.size() - 1);
+        });
 
         if (chatRoomId != null && !chatRoomId.isEmpty()) {
             roomId = chatRoomId;
