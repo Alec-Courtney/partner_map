@@ -1,11 +1,18 @@
 package com.androidcourse.partner_map.view.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.androidcourse.partner_map.R;
@@ -19,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvTabMap, tvTabList;
     private MapFragment mapFragment;
     private RequestListFragment listFragment;
+    private ActivityResultLauncher<String> locationPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewModel = new ViewModelProvider(this).get(MapViewModel.class);
+
+        locationPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(), granted -> {
+                    if (!granted) {
+                        Toast.makeText(this, "定位权限未授权，地图功能可能受限", Toast.LENGTH_LONG).show();
+                    }
+                });
 
         ImageView ivFilter = findViewById(R.id.iv_filter);
         ImageView ivProfile = findViewById(R.id.iv_profile);
@@ -51,6 +66,26 @@ public class MainActivity extends AppCompatActivity {
             tvTabMap.setSelected(isMap);
             tvTabList.setSelected(!isMap);
         });
+
+        requestLocationPermission();
+    }
+
+    private void requestLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            new AlertDialog.Builder(this)
+                    .setTitle("需要定位权限")
+                    .setMessage("搭子地图需要获取您的位置信息，用于显示周边需求和地图定位功能。")
+                    .setPositiveButton("去授权", (d, w) ->
+                            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION))
+                    .setNegativeButton("暂不", null)
+                    .show();
+        } else {
+            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
     }
 
     private void switchMode(boolean isMap) {

@@ -25,10 +25,13 @@ import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.androidcourse.partner_map.R;
+import com.androidcourse.partner_map.app.Constants;
 import com.androidcourse.partner_map.model.Category;
 import com.androidcourse.partner_map.model.PartnerRequest;
+import com.androidcourse.partner_map.model.User;
 import com.androidcourse.partner_map.util.CategoryHelper;
 import com.androidcourse.partner_map.util.LocationHelper;
+import com.androidcourse.partner_map.util.SharedPreferencesUtil;
 import com.androidcourse.partner_map.util.TimeUtil;
 import com.androidcourse.partner_map.view.activity.RequestDetailActivity;
 import com.androidcourse.partner_map.viewmodel.MapViewModel;
@@ -223,9 +226,16 @@ public class MapFragment extends Fragment {
         View btnAllSchool = view.findViewById(R.id.btn_school_all);
         View btnMySchool = view.findViewById(R.id.btn_school_mine);
         View.OnClickListener schoolClick = v -> {
-            if (btnAllSchool != null) btnAllSchool.setSelected(false);
-            if (btnMySchool != null) btnMySchool.setSelected(false);
+            if (btnAllSchool != null) {
+                btnAllSchool.setSelected(false);
+                btnAllSchool.setBackgroundColor(Color.parseColor("#E0E0E0"));
+            }
+            if (btnMySchool != null) {
+                btnMySchool.setSelected(false);
+                btnMySchool.setBackgroundColor(Color.parseColor("#E0E0E0"));
+            }
             v.setSelected(true);
+            v.setBackgroundColor(Color.parseColor("#2196F3"));
             selectedSchoolIdx[0] = (v.getId() == R.id.btn_school_mine) ? 1 : 0;
         };
         if (btnAllSchool != null) btnAllSchool.setOnClickListener(schoolClick);
@@ -282,6 +292,13 @@ public class MapFragment extends Fragment {
             filterRadius = radiusValues[selectedRadiusIdx[0]];
             filterCategory = selectedCategoryIdx[0] >= 0 ? selectedCategoryIdx[0] : null;
             filterTime = selectedTimeIdx[0] == 0 ? "today" : selectedTimeIdx[0] == 1 ? "week" : selectedTimeIdx[0] == 2 ? "month" : null;
+            if (selectedSchoolIdx[0] == 1) {
+                User cached = SharedPreferencesUtil.getInstance(requireContext())
+                        .getObject(Constants.KEY_USER_JSON, User.class);
+                filterSchoolId = cached != null ? cached.getSchoolId() : null;
+            } else {
+                filterSchoolId = null;
+            }
             loadRequests();
             dialog.dismiss();
         });

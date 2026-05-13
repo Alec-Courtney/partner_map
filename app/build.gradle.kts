@@ -10,6 +10,10 @@ android {
         }
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.androidcourse.partner_map"
         minSdk = 24
@@ -21,12 +25,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "API_BASE_URL", "\"https://app.shouzhitu.cn/api/v1/\"")
+            buildConfigField("String", "WS_BASE_URL", "\"wss://app.shouzhitu.cn/ws/chat\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "API_BASE_URL", "\"https://app.shouzhitu.cn/api/v1/\"")
+            buildConfigField("String", "WS_BASE_URL", "\"wss://app.shouzhitu.cn/ws/chat\"")
         }
     }
     compileOptions {

@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.androidcourse.partner_map.R;
+import com.androidcourse.partner_map.app.Constants;
+import com.androidcourse.partner_map.data.remote.ApiClient;
 import com.androidcourse.partner_map.data.remote.WebSocketManager;
+import com.androidcourse.partner_map.util.SharedPreferencesUtil;
 import com.androidcourse.partner_map.viewmodel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -25,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         if (viewModel.isLoggedIn()) {
-            startMain();
+            restoreTokenAndStartMain();
             return;
         }
 
@@ -36,6 +39,14 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> doLogin());
         tvRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
+    }
+
+    private void restoreTokenAndStartMain() {
+        String token = SharedPreferencesUtil.getInstance(this).getString(Constants.KEY_TOKEN, null);
+        if (token != null && !token.isEmpty()) {
+            WebSocketManager.getInstance().connect(token);
+        }
+        startMain();
     }
 
     private void doLogin() {

@@ -1,12 +1,16 @@
 package com.androidcourse.partner_map.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ChatRoom {
     private String chatRoomId;
     private String requestId;
     private String requesterId;
+    @SerializedName("requesterNickname")
     private String requesterName;
     private String requesterAvatar;
     private String publisherId;
+    @SerializedName("publisherNickname")
     private String publisherName;
     private String publisherAvatar;
     private int status; // 0=进行中, 1=已解散

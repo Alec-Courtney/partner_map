@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="12dp"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="8dp">
             <ImageView
                 android:id="@+id/iv_back"
                 android:layout_width="24dp"
@@ -33,74 +34,79 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="标题*" />
+            android:text="标题*"
+            android:textSize="13sp" />
         <EditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp" />
+            android:layout_height="40dp"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="描述*" />
+            android:text="描述*"
+            android:textSize="13sp" />
         <EditText
             android:id="@+id/et_description"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="64dp"
             android:gravity="top"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="分类*" />
+            android:text="分类*"
+            android:textSize="13sp" />
         <com.androidcourse.partner_map.view.widget.CategoryPicker
             android:id="@+id/category_picker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="需求位置*" />
+            android:text="需求位置*"
+            android:textSize="13sp" />
         <TextView
             android:id="@+id/tv_request_location"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="40dp"
             android:background="#F5F5F5"
             android:gravity="center"
             android:text="点击选择位置"
-            android:layout_marginBottom="12dp" />
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="人数上限*" />
+            android:text="人数上限*"
+            android:textSize="13sp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="6dp">
             <ImageView
                 android:id="@+id/iv_minus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@android:drawable/btn_minus"
                 android:contentDescription="减少" />
             <TextView
                 android:id="@+id/tv_max_participants"
-                android:layout_width="48dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="2"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:gravity="center" />
             <ImageView
                 android:id="@+id/iv_plus"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@android:drawable/ic_input_add"
                 android:contentDescription="增加" />
         </LinearLayout>
@@ -108,74 +114,84 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="预定时间*" />
+            android:text="预定时间*"
+            android:textSize="13sp" />
         <TextView
             android:id="@+id/tv_scheduled_time"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:background="#F5F5F5"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:text="点击选择日期和时间"
-            android:layout_marginBottom="12dp" />
+            android:textSize="13sp"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="失效提前量*" />
+            android:text="失效提前量*"
+            android:textSize="13sp" />
         <TextView
             android:id="@+id/tv_expire_time"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="40dp"
             android:background="#F5F5F5"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:text="1小时"
-            android:layout_marginBottom="12dp" />
+            android:textSize="13sp"
+            android:layout_marginBottom="6dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="性别要求" />
+            android:text="性别要求"
+            android:textSize="13sp" />
         <RadioGroup
             android:id="@+id/rg_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="6dp">
             <RadioButton
                 android:id="@+id/rb_any"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="不限"
+                android:textSize="13sp"
                 android:checked="true" />
             <RadioButton
                 android:id="@+id/rb_male_only"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="仅男" />
+                android:text="仅男"
+                android:textSize="13sp" />
             <RadioButton
                 android:id="@+id/rb_female_only"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="仅女" />
+                android:text="仅女"
+                android:textSize="13sp" />
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="消费说明" />
+            android:text="消费说明"
+            android:textSize="13sp" />
         <EditText
             android:id="@+id/et_cost"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:hint="费用分摊或预估消费"
-            android:layout_marginBottom="24dp" />
+            android:textSize="13sp"
+            android:layout_marginBottom="12dp" />
 
         <Button
             android:id="@+id/btn_publish"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:text="发 布" />
     </LinearLayout>
 </ScrollView>

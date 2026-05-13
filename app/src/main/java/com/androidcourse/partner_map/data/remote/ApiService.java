@@ -37,7 +37,7 @@ public interface ApiService {
     Call<ApiResponse<List<School>>> getSchools();
 
     @GET("requests")
-    Call<ApiResponse<List<PartnerRequest>>> getRequests(
+    Call<ApiResponse<PaginatedData<PartnerRequest>>> getRequests(
             @Query("lat") double lat,
             @Query("lng") double lng,
             @Query("radius") int radius,
@@ -67,7 +67,7 @@ public interface ApiService {
     Call<ApiResponse<Void>> completeRequest(@Path("requestId") String requestId);
 
     @GET("requests/my")
-    Call<ApiResponse<List<PartnerRequest>>> getMyRequests();
+    Call<ApiResponse<PaginatedData<PartnerRequest>>> getMyRequests();
 
     @GET("chat/rooms")
     Call<ApiResponse<List<ChatRoom>>> getChatRooms();
@@ -76,7 +76,7 @@ public interface ApiService {
     Call<ApiResponse<ChatRoom>> createChatRoom(@Body Map<String, String> body);
 
     @GET("chat/rooms/{roomId}/messages")
-    Call<ApiResponse<List<ChatMessage>>> getMessages(@Path("roomId") String roomId);
+    Call<ApiResponse<PaginatedData<ChatMessage>>> getMessages(@Path("roomId") String roomId);
 
     @POST("chat/rooms/{roomId}/messages")
     Call<ApiResponse<ChatMessage>> sendMessage(@Path("roomId") String roomId, @Body Map<String, String> body);
@@ -88,10 +88,10 @@ public interface ApiService {
     Call<ApiResponse<Void>> rejectParticipation(@Path("participationId") String participationId);
 
     @GET("participations/my")
-    Call<ApiResponse<List<Participation>>> getMyParticipations();
+    Call<ApiResponse<PaginatedData<Participation>>> getMyParticipations();
 
     @GET("evaluations/pending")
-    Call<ApiResponse<List<Evaluation>>> getPendingEvaluations();
+    Call<ApiResponse<PaginatedData<Evaluation>>> getPendingEvaluations();
 
     @POST("evaluations")
     Call<ApiResponse<Void>> submitEvaluation(@Body Evaluation evaluation);

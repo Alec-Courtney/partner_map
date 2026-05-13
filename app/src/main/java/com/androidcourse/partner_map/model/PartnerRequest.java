@@ -1,10 +1,13 @@
 package com.androidcourse.partner_map.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class PartnerRequest {
     private String requestId;
     private String publisherId;
+    @SerializedName("publisherNickname")
     private String publisherName;
     private String publisherAvatar;
     private String publisherSchool;

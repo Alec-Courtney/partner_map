@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.androidcourse.partner_map.data.remote.ApiClient;
 import com.androidcourse.partner_map.data.remote.ApiResponse;
+import com.androidcourse.partner_map.data.remote.PaginatedData;
 import com.androidcourse.partner_map.model.ChatMessage;
 import com.androidcourse.partner_map.model.ChatRoom;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,9 +85,20 @@ public class ChatRepository {
         result.setValue(Resource.loading(null));
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                retrofit2.Response<ApiResponse<List<ChatMessage>>> response = apiClient.getApiService().getMessages(roomId).execute();
-                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    result.postValue(Resource.success(response.body().getData()));
+                retrofit2.Response<ApiResponse<PaginatedData<ChatMessage>>> response = apiClient.getApiService().getMessages(roomId).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        PaginatedData<ChatMessage> pageData = response.body().getData();
+                        List<ChatMessage> items = pageData != null ? pageData.getItems() : new ArrayList<>();
+                        result.postValue(Resource.success(items));
+                    } else {
+                        int code = response.body().getCode();
+                        if (code == 3001) {
+                            result.postValue(Resource.success(new ArrayList<>()));
+                        } else {
+                            result.postValue(Resource.error(response.body().getMessage(), null));
+                        }
+                    }
                 } else {
                     result.postValue(Resource.error("加载失败", null));
                 }

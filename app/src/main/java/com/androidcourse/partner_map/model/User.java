@@ -6,7 +6,7 @@ public class User {
     private String avatar;
     private String schoolId;
     private String schoolName;
-    private String gender;
+    private int gender;
     private float attendRate;
     private float praiseRate;
     private String token;
@@ -28,8 +28,8 @@ public class User {
     public String getSchoolName() { return schoolName; }
     public void setSchoolName(String schoolName) { this.schoolName = schoolName; }
 
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = gender; }
+    public int getGender() { return gender; }
+    public void setGender(int gender) { this.gender = gender; }
 
     public float getAttendRate() { return attendRate; }
     public void setAttendRate(float attendRate) { this.attendRate = attendRate; }
