@@ -43,7 +43,9 @@ public class MyRequestsActivity extends AppCompatActivity {
 
             @Override
             public void onEdit(PartnerRequest request) {
-                // open edit
+                Intent intent = new Intent(MyRequestsActivity.this, CreateRequestActivity.class);
+                intent.putExtra(CreateRequestActivity.EXTRA_REQUEST_ID, request.getRequestId());
+                startActivity(intent);
             }
 
             @Override

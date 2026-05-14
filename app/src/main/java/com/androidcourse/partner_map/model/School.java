@@ -5,6 +5,7 @@ public class School {
     private String name;
     private double lat;
     private double lng;
+    private String city;
 
     public School() {}
 
@@ -26,4 +27,12 @@ public class School {
 
     public double getLng() { return lng; }
     public void setLng(double lng) { this.lng = lng; }
+
+    public String getCity() {
+        return city == null ? "" : city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

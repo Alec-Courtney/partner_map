@@ -51,6 +51,7 @@ public class MapFragment extends Fragment {
     private PartnerRequest selectedRequest;
     private Integer filterCategory;
     private String filterSchoolId;
+    private String filterSchoolMode;
     private int filterRadius = 10000;
     private String filterTime;
     private double currentLat = 39.9;
@@ -123,7 +124,15 @@ public class MapFragment extends Fragment {
     }
 
     private void loadRequests() {
-        viewModel.loadRequests(currentLat, currentLng, filterRadius, filterCategory, filterSchoolId, filterTime)
+        viewModel.loadRequests(
+                        currentLat,
+                        currentLng,
+                        filterRadius,
+                        filterCategory,
+                        filterSchoolId,
+                        filterSchoolMode,
+                        filterTime
+                )
                 .observe(getViewLifecycleOwner(), resource -> {
                     if (resource.status == com.androidcourse.partner_map.data.repository.Resource.Status.SUCCESS && resource.data != null) {
                         currentRequests = resource.data;
@@ -136,6 +145,10 @@ public class MapFragment extends Fragment {
                 });
     }
 
+    public void refreshRequests() {
+        loadRequests();
+    }
+
     private void updateMarkers() {
         aMap.clear();
         markerRequestMap.clear();
@@ -146,24 +159,14 @@ public class MapFragment extends Fragment {
                     .title(req.getTitle())
                     .snippet(CategoryHelper.getLabel(req.getCategory()));
             try {
-                options.icon(BitmapDescriptorFactory.defaultMarker(getHueForCategory(req.getCategory())));
+                options.icon(BitmapDescriptorFactory.fromBitmap(
+                        BitmapFactory.decodeResource(getResources(), CategoryHelper.getIconRes(req.getCategory()))
+                ));
             } catch (Exception e) {
                 options.icon(BitmapDescriptorFactory.defaultMarker());
             }
             Marker marker = aMap.addMarker(options);
             markerRequestMap.put(marker, req);
-        }
-    }
-
-    private float getHueForCategory(int category) {
-        switch (category) {
-            case 0: return 210f;
-            case 1: return 120f;
-            case 2: return 30f;
-            case 3: return 280f;
-            case 4: return 340f;
-            case 5: return 50f;
-            default: return 0f;
         }
     }
 
@@ -176,7 +179,7 @@ public class MapFragment extends Fragment {
         String dist = results[0] < 1000 ? String.format("%.0fm", results[0])
                 : String.format("%.1fkm", results[0] / 1000f);
         tvCardLocation.setText(dist + " · " + CategoryHelper.getStatusLabel(request.getStatus()));
-        tvCardTime.setText(TimeUtil.formatRelative(request.getScheduledTime())
+        tvCardTime.setText(TimeUtil.formatScheduledRelative(request.getScheduledTime())
                 + " · 余" + (request.getMaxParticipants() - request.getCurrentParticipants()) + "人");
         cardPreview.setVisibility(View.VISIBLE);
     }
@@ -282,6 +285,7 @@ public class MapFragment extends Fragment {
         view.findViewById(R.id.btn_reset).setOnClickListener(v -> {
             filterCategory = null;
             filterSchoolId = null;
+            filterSchoolMode = null;
             filterRadius = 10000;
             filterTime = null;
             loadRequests();
@@ -296,8 +300,10 @@ public class MapFragment extends Fragment {
                 User cached = SharedPreferencesUtil.getInstance(requireContext())
                         .getObject(Constants.KEY_USER_JSON, User.class);
                 filterSchoolId = cached != null ? cached.getSchoolId() : null;
+                filterSchoolMode = filterSchoolId == null || filterSchoolId.isEmpty() ? null : "my";
             } else {
                 filterSchoolId = null;
+                filterSchoolMode = "all";
             }
             loadRequests();
             dialog.dismiss();

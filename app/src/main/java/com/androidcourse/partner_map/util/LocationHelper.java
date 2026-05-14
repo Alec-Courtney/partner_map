@@ -8,6 +8,8 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
 public class LocationHelper {
+    private static final String AUTH_FAIL_MARKER = "INVALID_USER_SCODE";
+
     public interface LocationCallback {
         void onLocationResult(double lat, double lng);
         void onLocationError(String error);
@@ -35,14 +37,14 @@ public class LocationHelper {
                         callback.onLocationResult(location.getLatitude(), location.getLongitude());
                     } else {
                         String error = location != null ? location.getLocationDetail() : "定位失败";
-                        callback.onLocationError(error);
+                        callback.onLocationError(normalizeErrorMessage(error));
                     }
                     stopLocation();
                 }
             });
             locationClient.startLocation();
         } catch (Exception e) {
-            callback.onLocationError(e.getMessage());
+            callback.onLocationError(normalizeErrorMessage(e.getMessage()));
         }
     }
 
@@ -52,5 +54,15 @@ public class LocationHelper {
             locationClient.onDestroy();
             locationClient = null;
         }
+    }
+
+    private String normalizeErrorMessage(String rawError) {
+        if (rawError == null || rawError.trim().isEmpty()) {
+            return "定位失败，请稍后重试";
+        }
+        if (rawError.contains(AUTH_FAIL_MARKER)) {
+            return "定位失败：当前安装包的高德地图签名未授权，请检查应用包名和 SHA1 配置";
+        }
+        return rawError;
     }
 }

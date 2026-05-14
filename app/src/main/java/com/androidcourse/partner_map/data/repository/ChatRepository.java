@@ -3,7 +3,6 @@ package com.androidcourse.partner_map.data.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.androidcourse.partner_map.data.remote.ApiClient;
 import com.androidcourse.partner_map.data.remote.ApiResponse;
 import com.androidcourse.partner_map.data.remote.PaginatedData;
 import com.androidcourse.partner_map.model.ChatMessage;
@@ -13,29 +12,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executors;
 
-public class ChatRepository {
-    private final ApiClient apiClient;
-
-    public ChatRepository() {
-        apiClient = ApiClient.getInstance();
-    }
+public class ChatRepository extends BaseRepository {
 
     public LiveData<Resource<Map<String, Object>>> participate(String requestId) {
         MutableLiveData<Resource<Map<String, Object>>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));
-        Executors.newSingleThreadExecutor().execute(() -> {
+        IO.execute(() -> {
             try {
                 retrofit2.Response<ApiResponse<Map<String, Object>>> response =
                         apiClient.getApiService().participate(requestId).execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     result.postValue(Resource.success(response.body().getData()));
                 } else {
-                    result.postValue(Resource.error("参与失败", null));
+                    result.postValue(Resource.error(getErrorMessage(response, "申请参与失败"), null));
                 }
             } catch (Exception e) {
-                result.postValue(Resource.error("网络错误", null));
+                result.postValue(Resource.error("网络错误: " + e.getMessage(), null));
             }
         });
         return result;
@@ -44,37 +37,37 @@ public class ChatRepository {
     public LiveData<Resource<List<ChatRoom>>> getChatRooms() {
         MutableLiveData<Resource<List<ChatRoom>>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));
-        Executors.newSingleThreadExecutor().execute(() -> {
+        IO.execute(() -> {
             try {
-                retrofit2.Response<ApiResponse<List<ChatRoom>>> response = apiClient.getApiService().getChatRooms().execute();
+                retrofit2.Response<ApiResponse<List<ChatRoom>>> response =
+                        apiClient.getApiService().getChatRooms().execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    result.postValue(Resource.success(response.body().getData()));
+                    List<ChatRoom> payload = response.body().getData();
+                    result.postValue(Resource.success(payload == null ? new ArrayList<>() : payload));
                 } else {
-                    result.postValue(Resource.error("加载失败", null));
+                    result.postValue(Resource.error(getErrorMessage(response, "加载聊天室失败"), null));
                 }
             } catch (Exception e) {
-                result.postValue(Resource.error("网络错误", null));
+                result.postValue(Resource.error("网络错误: " + e.getMessage(), null));
             }
         });
         return result;
     }
 
-    public LiveData<Resource<ChatRoom>> createChatRoom(String requestId, String requesterId) {
+    public LiveData<Resource<ChatRoom>> openChatRoom(String requestId) {
         MutableLiveData<Resource<ChatRoom>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));
-        Executors.newSingleThreadExecutor().execute(() -> {
+        IO.execute(() -> {
             try {
-                Map<String, String> body = new HashMap<>();
-                body.put("requestId", requestId);
-                body.put("requesterId", requesterId);
-                retrofit2.Response<ApiResponse<ChatRoom>> response = apiClient.getApiService().createChatRoom(body).execute();
+                retrofit2.Response<ApiResponse<ChatRoom>> response =
+                        apiClient.getApiService().openChatRoom(requestId).execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     result.postValue(Resource.success(response.body().getData()));
                 } else {
-                    result.postValue(Resource.error("创建失败", null));
+                    result.postValue(Resource.error(getErrorMessage(response, "进入私聊失败"), null));
                 }
             } catch (Exception e) {
-                result.postValue(Resource.error("网络错误", null));
+                result.postValue(Resource.error("网络错误: " + e.getMessage(), null));
             }
         });
         return result;
@@ -83,27 +76,18 @@ public class ChatRepository {
     public LiveData<Resource<List<ChatMessage>>> getMessages(String roomId) {
         MutableLiveData<Resource<List<ChatMessage>>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));
-        Executors.newSingleThreadExecutor().execute(() -> {
+        IO.execute(() -> {
             try {
-                retrofit2.Response<ApiResponse<PaginatedData<ChatMessage>>> response = apiClient.getApiService().getMessages(roomId).execute();
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().isSuccess()) {
-                        PaginatedData<ChatMessage> pageData = response.body().getData();
-                        List<ChatMessage> items = pageData != null ? pageData.getItems() : new ArrayList<>();
-                        result.postValue(Resource.success(items));
-                    } else {
-                        int code = response.body().getCode();
-                        if (code == 3001) {
-                            result.postValue(Resource.success(new ArrayList<>()));
-                        } else {
-                            result.postValue(Resource.error(response.body().getMessage(), null));
-                        }
-                    }
+                retrofit2.Response<ApiResponse<PaginatedData<ChatMessage>>> response =
+                        apiClient.getApiService().getMessages(roomId, 1, 100).execute();
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    PaginatedData<ChatMessage> payload = response.body().getData();
+                    result.postValue(Resource.success(payload == null ? new ArrayList<>() : payload.getItems()));
                 } else {
-                    result.postValue(Resource.error("加载失败", null));
+                    result.postValue(Resource.error(getErrorMessage(response, "加载消息失败"), null));
                 }
             } catch (Exception e) {
-                result.postValue(Resource.error("网络错误", null));
+                result.postValue(Resource.error("网络错误: " + e.getMessage(), null));
             }
         });
         return result;
@@ -112,18 +96,19 @@ public class ChatRepository {
     public LiveData<Resource<ChatMessage>> sendMessage(String roomId, String content) {
         MutableLiveData<Resource<ChatMessage>> result = new MutableLiveData<>();
         result.setValue(Resource.loading(null));
-        Executors.newSingleThreadExecutor().execute(() -> {
+        IO.execute(() -> {
             try {
                 Map<String, String> body = new HashMap<>();
                 body.put("content", content);
-                retrofit2.Response<ApiResponse<ChatMessage>> response = apiClient.getApiService().sendMessage(roomId, body).execute();
+                retrofit2.Response<ApiResponse<ChatMessage>> response =
+                        apiClient.getApiService().sendMessage(roomId, body).execute();
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     result.postValue(Resource.success(response.body().getData()));
                 } else {
-                    result.postValue(Resource.error("发送失败", null));
+                    result.postValue(Resource.error(getErrorMessage(response, "发送消息失败"), null));
                 }
             } catch (Exception e) {
-                result.postValue(Resource.error("网络错误", null));
+                result.postValue(Resource.error("网络错误: " + e.getMessage(), null));
             }
         });
         return result;

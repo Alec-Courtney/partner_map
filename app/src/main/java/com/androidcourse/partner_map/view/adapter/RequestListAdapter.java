@@ -41,8 +41,8 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
         PartnerRequest item = data.get(position);
         holder.ivCategory.setImageResource(CategoryHelper.getIconRes(item.getCategory()));
         holder.tvTitle.setText(item.getTitle());
-        holder.tvLocation.setText(String.format("%.2fkm · %s", 0.5, CategoryHelper.getStatusLabel(item.getStatus())));
-        holder.tvTime.setText(TimeUtil.formatRelative(item.getScheduledTime()) + " · 余" + (item.getMaxParticipants() - item.getCurrentParticipants()) + "人");
+        holder.tvLocation.setText(TimeUtil.formatDistanceMeters(item.getDistanceMeters()) + " · " + CategoryHelper.getStatusLabel(item.getStatus()));
+        holder.tvTime.setText(TimeUtil.formatScheduledRelative(item.getScheduledTime()) + " · 余" + (item.getMaxParticipants() - item.getCurrentParticipants()) + "人");
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
     }
 

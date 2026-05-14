@@ -20,8 +20,9 @@ public class MapViewModel extends ViewModel {
     }
 
     public LiveData<Resource<List<PartnerRequest>>> loadRequests(double lat, double lng, int radius,
-                                                                  Integer category, String schoolId, String timeFilter) {
-        return requestRepository.getNearbyRequests(lat, lng, radius, category, schoolId, timeFilter, 0);
+                                                                  Integer category, String schoolId,
+                                                                  String schoolFilter, String timeFilter) {
+        return requestRepository.getNearbyRequests(lat, lng, radius, category, schoolId, schoolFilter, timeFilter, 1);
     }
 
     public MutableLiveData<List<PartnerRequest>> getRequestList() {

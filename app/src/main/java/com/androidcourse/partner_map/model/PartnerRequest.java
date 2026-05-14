@@ -7,93 +7,258 @@ import java.util.List;
 public class PartnerRequest {
     private String requestId;
     private String publisherId;
-    @SerializedName("publisherNickname")
-    private String publisherName;
+    @SerializedName(value = "publisherNickname", alternate = {"publisherName"})
+    private String publisherNickname;
     private String publisherAvatar;
-    private String publisherSchool;
     private String title;
     private String description;
-    private int category;
-    private double requestLat;
-    private double requestLng;
-    private double publishLat;
-    private double publishLng;
-    private int maxParticipants;
-    private int currentParticipants;
-    private long scheduledTime;
-    private int expireBeforeMin;
-    private int genderRequirement; // 0=不限, 1=仅男, 2=仅女
+    private Integer category;
+    private String categoryName;
+    private Double requestLat;
+    private Double requestLng;
+    private String requestAddress;
+    private Double publishLat;
+    private Double publishLng;
+    private Integer maxParticipants;
+    private Integer currentParticipants;
+    private Long scheduledTime;
+    private Integer expireBeforeMin;
+    private Integer genderRequirement;
+    private String genderRequirementName;
     private String costDescription;
-    private int status; // 0=招募中, 1=已满员, 2=已结束
-    private long createdAt;
-    private boolean isSnapshot;
+    private Integer status;
+    private String statusName;
+    private Long createdAt;
+    private Boolean isPublisher;
+    private Integer myParticipationStatus;
+    private String mySnapshotData;
     private List<User> participants;
+    private transient float distanceMeters;
 
-    public PartnerRequest() {}
+    public PartnerRequest() {
+    }
 
-    public String getRequestId() { return requestId; }
-    public void setRequestId(String requestId) { this.requestId = requestId; }
+    public String getRequestId() {
+        return requestId;
+    }
 
-    public String getPublisherId() { return publisherId; }
-    public void setPublisherId(String publisherId) { this.publisherId = publisherId; }
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
 
-    public String getPublisherName() { return publisherName; }
-    public void setPublisherName(String publisherName) { this.publisherName = publisherName; }
+    public String getPublisherId() {
+        return publisherId;
+    }
 
-    public String getPublisherAvatar() { return publisherAvatar; }
-    public void setPublisherAvatar(String publisherAvatar) { this.publisherAvatar = publisherAvatar; }
+    public void setPublisherId(String publisherId) {
+        this.publisherId = publisherId;
+    }
 
-    public String getPublisherSchool() { return publisherSchool; }
-    public void setPublisherSchool(String publisherSchool) { this.publisherSchool = publisherSchool; }
+    public String getPublisherName() {
+        return publisherNickname == null ? "" : publisherNickname;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public void setPublisherName(String publisherNickname) {
+        this.publisherNickname = publisherNickname;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getPublisherAvatar() {
+        return publisherAvatar;
+    }
 
-    public int getCategory() { return category; }
-    public void setCategory(int category) { this.category = category; }
+    public void setPublisherAvatar(String publisherAvatar) {
+        this.publisherAvatar = publisherAvatar;
+    }
 
-    public double getRequestLat() { return requestLat; }
-    public void setRequestLat(double requestLat) { this.requestLat = requestLat; }
+    public String getTitle() {
+        return title == null ? "" : title;
+    }
 
-    public double getRequestLng() { return requestLng; }
-    public void setRequestLng(double requestLng) { this.requestLng = requestLng; }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    public double getPublishLat() { return publishLat; }
-    public void setPublishLat(double publishLat) { this.publishLat = publishLat; }
+    public String getDescription() {
+        return description == null ? "" : description;
+    }
 
-    public double getPublishLng() { return publishLng; }
-    public void setPublishLng(double publishLng) { this.publishLng = publishLng; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public int getMaxParticipants() { return maxParticipants; }
-    public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
+    public int getCategory() {
+        return category == null ? 0 : category;
+    }
 
-    public int getCurrentParticipants() { return currentParticipants; }
-    public void setCurrentParticipants(int currentParticipants) { this.currentParticipants = currentParticipants; }
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
 
-    public long getScheduledTime() { return scheduledTime; }
-    public void setScheduledTime(long scheduledTime) { this.scheduledTime = scheduledTime; }
+    public String getCategoryName() {
+        return categoryName == null ? "" : categoryName;
+    }
 
-    public int getExpireBeforeMin() { return expireBeforeMin; }
-    public void setExpireBeforeMin(int expireBeforeMin) { this.expireBeforeMin = expireBeforeMin; }
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-    public int getGenderRequirement() { return genderRequirement; }
-    public void setGenderRequirement(int genderRequirement) { this.genderRequirement = genderRequirement; }
+    public double getRequestLat() {
+        return requestLat == null ? 0D : requestLat;
+    }
 
-    public String getCostDescription() { return costDescription; }
-    public void setCostDescription(String costDescription) { this.costDescription = costDescription; }
+    public void setRequestLat(Double requestLat) {
+        this.requestLat = requestLat;
+    }
 
-    public int getStatus() { return status; }
-    public void setStatus(int status) { this.status = status; }
+    public double getRequestLng() {
+        return requestLng == null ? 0D : requestLng;
+    }
 
-    public long getCreatedAt() { return createdAt; }
-    public void setCreatedAt(long createdAt) { this.createdAt = createdAt; }
+    public void setRequestLng(Double requestLng) {
+        this.requestLng = requestLng;
+    }
 
-    public boolean isSnapshot() { return isSnapshot; }
-    public void setSnapshot(boolean snapshot) { isSnapshot = snapshot; }
+    public String getRequestAddress() {
+        return requestAddress == null ? "" : requestAddress;
+    }
 
-    public List<User> getParticipants() { return participants; }
-    public void setParticipants(List<User> participants) { this.participants = participants; }
+    public void setRequestAddress(String requestAddress) {
+        this.requestAddress = requestAddress;
+    }
+
+    public double getPublishLat() {
+        return publishLat == null ? 0D : publishLat;
+    }
+
+    public void setPublishLat(Double publishLat) {
+        this.publishLat = publishLat;
+    }
+
+    public double getPublishLng() {
+        return publishLng == null ? 0D : publishLng;
+    }
+
+    public void setPublishLng(Double publishLng) {
+        this.publishLng = publishLng;
+    }
+
+    public int getMaxParticipants() {
+        return maxParticipants == null ? 0 : maxParticipants;
+    }
+
+    public void setMaxParticipants(Integer maxParticipants) {
+        this.maxParticipants = maxParticipants;
+    }
+
+    public int getCurrentParticipants() {
+        return currentParticipants == null ? 0 : currentParticipants;
+    }
+
+    public void setCurrentParticipants(Integer currentParticipants) {
+        this.currentParticipants = currentParticipants;
+    }
+
+    public long getScheduledTime() {
+        return scheduledTime == null ? 0L : scheduledTime;
+    }
+
+    public void setScheduledTime(Long scheduledTime) {
+        this.scheduledTime = scheduledTime;
+    }
+
+    public int getExpireBeforeMin() {
+        return expireBeforeMin == null ? 0 : expireBeforeMin;
+    }
+
+    public void setExpireBeforeMin(Integer expireBeforeMin) {
+        this.expireBeforeMin = expireBeforeMin;
+    }
+
+    public int getGenderRequirement() {
+        return genderRequirement == null ? 0 : genderRequirement;
+    }
+
+    public void setGenderRequirement(Integer genderRequirement) {
+        this.genderRequirement = genderRequirement;
+    }
+
+    public String getGenderRequirementName() {
+        return genderRequirementName == null ? "" : genderRequirementName;
+    }
+
+    public void setGenderRequirementName(String genderRequirementName) {
+        this.genderRequirementName = genderRequirementName;
+    }
+
+    public String getCostDescription() {
+        return costDescription == null ? "" : costDescription;
+    }
+
+    public void setCostDescription(String costDescription) {
+        this.costDescription = costDescription;
+    }
+
+    public int getStatus() {
+        return status == null ? 0 : status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName == null ? "" : statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public long getCreatedAt() {
+        return createdAt == null ? 0L : createdAt;
+    }
+
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public boolean isPublisher() {
+        return isPublisher != null && isPublisher;
+    }
+
+    public void setPublisher(Boolean publisher) {
+        isPublisher = publisher;
+    }
+
+    public Integer getMyParticipationStatus() {
+        return myParticipationStatus;
+    }
+
+    public void setMyParticipationStatus(Integer myParticipationStatus) {
+        this.myParticipationStatus = myParticipationStatus;
+    }
+
+    public String getMySnapshotData() {
+        return mySnapshotData;
+    }
+
+    public void setMySnapshotData(String mySnapshotData) {
+        this.mySnapshotData = mySnapshotData;
+    }
+
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
+    }
+
+    public float getDistanceMeters() {
+        return distanceMeters;
+    }
+
+    public void setDistanceMeters(float distanceMeters) {
+        this.distanceMeters = distanceMeters;
+    }
 }

@@ -17,4 +17,12 @@ public class CreateRequestViewModel extends ViewModel {
     public LiveData<Resource<PartnerRequest>> createRequest(PartnerRequest request) {
         return requestRepository.createRequest(request);
     }
+
+    public LiveData<Resource<PartnerRequest>> updateRequest(String requestId, PartnerRequest request) {
+        return requestRepository.updateRequest(requestId, request);
+    }
+
+    public LiveData<Resource<PartnerRequest>> getRequestDetail(String requestId) {
+        return requestRepository.getRequestDetail(requestId);
+    }
 }

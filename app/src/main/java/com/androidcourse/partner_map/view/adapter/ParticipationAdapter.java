@@ -39,6 +39,14 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
         this.itemListener = null;
     }
 
+    public ParticipationAdapter(List<Participation> data,
+                                OnActionListener actionListener,
+                                OnItemClickListener itemListener) {
+        this.data = data;
+        this.actionListener = actionListener;
+        this.itemListener = itemListener;
+    }
+
     public ParticipationAdapter(List<Participation> data, OnItemClickListener listener) {
         this.data = data;
         this.actionListener = null;
@@ -78,9 +86,7 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
             holder.itemView.findViewById(R.id.btn_reject).setVisibility(View.GONE);
         }
 
-        if (itemListener != null) {
-            holder.itemView.setOnClickListener(v -> itemListener.onItemClick(p));
-        }
+        holder.itemView.setOnClickListener(itemListener == null ? null : v -> itemListener.onItemClick(p));
     }
 
     @Override

@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.androidcourse.partner_map.app.Constants;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,9 @@ public class WebSocketManager {
     }
 
     public void connect(String token) {
+        if (token == null || token.trim().isEmpty()) {
+            return;
+        }
         this.token = token;
         if (webSocket != null) {
             webSocket.close(1000, "Reconnecting");
@@ -64,7 +69,17 @@ public class WebSocketManager {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 mainHandler.post(() -> {
-                    String type = "NEW_MESSAGE";
+                    String type = "UNKNOWN";
+                    try {
+                        JsonObject jsonObject = JsonParser.parseString(text).getAsJsonObject();
+                        if (jsonObject.has("type")) {
+                            type = jsonObject.get("type").getAsString();
+                        } else if (jsonObject.has("chatRoomId") && jsonObject.has("content")) {
+                            type = "NEW_MESSAGE";
+                        }
+                    } catch (Exception ignored) {
+                        type = "NEW_MESSAGE";
+                    }
                     for (MessageListener listener : messageListeners) {
                         listener.onMessage(type, text);
                     }

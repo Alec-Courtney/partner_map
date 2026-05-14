@@ -52,4 +52,14 @@ public class CategoryPicker extends LinearLayout {
     public void setOnCategorySelectedListener(OnCategorySelectedListener listener) {
         this.listener = listener;
     }
+
+    public void setSelectedCategory(int categoryCode) {
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton button = (RadioButton) radioGroup.getChildAt(i);
+            if (((Integer) button.getTag()) == categoryCode) {
+                button.setChecked(true);
+                return;
+            }
+        }
+    }
 }

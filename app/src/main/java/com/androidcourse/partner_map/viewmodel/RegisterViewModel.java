@@ -21,7 +21,7 @@ public class RegisterViewModel extends AndroidViewModel {
         userRepository = new UserRepository(application);
     }
 
-    public LiveData<Resource<User>> register(String nickname, String password, String gender, String schoolId, String avatar) {
+    public LiveData<Resource<User>> register(String nickname, String password, int gender, String schoolId, String avatar) {
         return userRepository.register(nickname, password, gender, schoolId, avatar);
     }
 

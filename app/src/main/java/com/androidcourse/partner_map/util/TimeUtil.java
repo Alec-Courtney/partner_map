@@ -8,6 +8,7 @@ public class TimeUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM月dd日", Locale.CHINA);
     private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm", Locale.CHINA);
     private static final SimpleDateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+    private static final SimpleDateFormat API_DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
     private static final SimpleDateFormat CHAT_DATE_FORMAT = new SimpleDateFormat("M月d日", Locale.CHINA);
 
     public static String formatDate(long timestamp) {
@@ -38,10 +39,41 @@ public class TimeUtil {
         return formatDate(timestamp);
     }
 
+    public static String formatScheduledRelative(long timestamp) {
+        long diff = timestamp - System.currentTimeMillis();
+        if (diff <= 0) {
+            return "已开始";
+        }
+        long minutes = diff / 60000;
+        if (minutes < 60) {
+            return minutes + "分钟后";
+        }
+        long hours = minutes / 60;
+        if (hours < 24) {
+            return hours + "小时后";
+        }
+        long days = hours / 24;
+        if (days < 30) {
+            return days + "天后";
+        }
+        return formatDate(timestamp);
+    }
+
+    public static String toApiDateTime(long timestamp) {
+        return API_DATETIME_FORMAT.format(new Date(timestamp));
+    }
+
     public static String formatDistance(double distanceKm) {
         if (distanceKm < 1) {
             return String.format(Locale.CHINA, "%.0fm", distanceKm * 1000);
         }
         return String.format(Locale.CHINA, "%.1fkm", distanceKm);
+    }
+
+    public static String formatDistanceMeters(float distanceMeters) {
+        if (distanceMeters < 1000F) {
+            return String.format(Locale.CHINA, "%.0fm", distanceMeters);
+        }
+        return String.format(Locale.CHINA, "%.1fkm", distanceMeters / 1000F);
     }
 }

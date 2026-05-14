@@ -72,14 +72,22 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "请填写完整信息", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (nickname.length() < 2 || nickname.length() > 20) {
+            Toast.makeText(this, "昵称长度需在2到20个字符之间", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (password.length() < 6 || password.length() > 20) {
+            Toast.makeText(this, "密码长度需在6到20个字符之间", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (!password.equals(confirm)) {
             Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
             return;
         }
         int genderId = rgGender.getCheckedRadioButtonId();
-        String gender = "未知";
-        if (genderId == R.id.rb_male) gender = "男";
-        else if (genderId == R.id.rb_female) gender = "女";
+        int gender = 0;
+        if (genderId == R.id.rb_male) gender = 1;
+        else if (genderId == R.id.rb_female) gender = 2;
 
         int schoolPos = spinnerSchool.getSelectedItemPosition();
         if (schoolPos <= 0 || schoolPos > schoolList.size()) {

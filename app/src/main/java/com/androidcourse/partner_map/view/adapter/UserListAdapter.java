@@ -15,9 +15,20 @@ import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
     private final List<User> data;
+    private final OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(User user);
+    }
 
     public UserListAdapter(List<User> data) {
         this.data = data;
+        this.listener = null;
+    }
+
+    public UserListAdapter(List<User> data, OnItemClickListener listener) {
+        this.data = data;
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,6 +46,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHo
         holder.tvStatus.setText(String.format("好评率 %.0f%%", user.getPraiseRate() * 100));
         holder.itemView.findViewById(R.id.btn_approve).setVisibility(View.GONE);
         holder.itemView.findViewById(R.id.btn_reject).setVisibility(View.GONE);
+        holder.itemView.setOnClickListener(listener == null ? null : v -> listener.onItemClick(user));
     }
 
     @Override

@@ -57,6 +57,13 @@
             android:layout_marginBottom="4dp" />
 
         <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="状态"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,6 +118,22 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp" />
 
+        <TextView
+            android:id="@+id/tv_pending_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待审批"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_marginBottom="4dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pending_participations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp" />
+
         <LinearLayout
             android:id="@+id/layout_publisher_actions"
             android:layout_width="match_parent"
@@ -128,7 +151,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="删除"
+                android:text="取消需求"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
@@ -136,6 +159,14 @@
             android:id="@+id/btn_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="私信发起者" />
+            android:text="进入私聊" />
+
+        <Button
+            android:id="@+id/btn_secondary_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="申请加入"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

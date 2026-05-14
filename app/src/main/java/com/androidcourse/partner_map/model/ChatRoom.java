@@ -5,15 +5,18 @@ import com.google.gson.annotations.SerializedName;
 public class ChatRoom {
     private String chatRoomId;
     private String requestId;
+    private String requestTitle;
     private String requesterId;
-    @SerializedName("requesterNickname")
+    @SerializedName(value = "requesterNickname", alternate = {"requesterName"})
     private String requesterName;
     private String requesterAvatar;
     private String publisherId;
-    @SerializedName("publisherNickname")
+    @SerializedName(value = "publisherNickname", alternate = {"publisherName"})
     private String publisherName;
     private String publisherAvatar;
-    private int status; // 0=进行中, 1=已解散
+    private String lastMessage;
+    private Long lastMessageAt;
+    private Integer status;
 
     public ChatRoom() {}
 
@@ -22,6 +25,14 @@ public class ChatRoom {
 
     public String getRequestId() { return requestId; }
     public void setRequestId(String requestId) { this.requestId = requestId; }
+
+    public String getRequestTitle() {
+        return requestTitle == null ? "" : requestTitle;
+    }
+
+    public void setRequestTitle(String requestTitle) {
+        this.requestTitle = requestTitle;
+    }
 
     public String getRequesterId() { return requesterId; }
     public void setRequesterId(String requesterId) { this.requesterId = requesterId; }
@@ -41,6 +52,22 @@ public class ChatRoom {
     public String getPublisherAvatar() { return publisherAvatar; }
     public void setPublisherAvatar(String publisherAvatar) { this.publisherAvatar = publisherAvatar; }
 
-    public int getStatus() { return status; }
-    public void setStatus(int status) { this.status = status; }
+    public String getLastMessage() {
+        return lastMessage == null ? "" : lastMessage;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
+    }
+
+    public long getLastMessageAt() {
+        return lastMessageAt == null ? 0L : lastMessageAt;
+    }
+
+    public void setLastMessageAt(Long lastMessageAt) {
+        this.lastMessageAt = lastMessageAt;
+    }
+
+    public int getStatus() { return status == null ? 0 : status; }
+    public void setStatus(Integer status) { this.status = status; }
 }

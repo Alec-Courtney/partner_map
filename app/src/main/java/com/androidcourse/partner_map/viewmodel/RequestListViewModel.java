@@ -17,7 +17,8 @@ public class RequestListViewModel extends ViewModel {
     }
 
     public LiveData<Resource<List<PartnerRequest>>> loadRequests(double lat, double lng, int radius,
-                                                                   Integer category, String schoolId, String timeFilter, int page) {
-        return requestRepository.getNearbyRequests(lat, lng, radius, category, schoolId, timeFilter, page);
+                                                                   Integer category, String schoolId,
+                                                                   String schoolFilter, String timeFilter, int page) {
+        return requestRepository.getNearbyRequests(lat, lng, radius, category, schoolId, schoolFilter, timeFilter, page);
     }
 }

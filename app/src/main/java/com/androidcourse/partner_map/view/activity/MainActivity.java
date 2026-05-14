@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
@@ -58,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
         tvTabList.setOnClickListener(v -> switchMode(false));
         fabAdd.setOnClickListener(v -> startActivity(new Intent(this, CreateRequestActivity.class)));
         ivProfile.setOnClickListener(v -> startActivity(new Intent(this, ProfileActivity.class)));
-        ivFilter.setOnClickListener(v -> {
-            if (mapFragment != null) mapFragment.showFilterDialog();
-        });
+        ivFilter.setOnClickListener(v -> showFilterForCurrentPage());
 
         viewModel.getIsMapMode().observe(this, isMap -> {
             tvTabMap.setSelected(isMap);
@@ -93,5 +92,25 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, isMap ? mapFragment : listFragment)
                 .commit();
+    }
+
+    private void showFilterForCurrentPage() {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (!(current instanceof MapFragment)) {
+            switchMode(true);
+            getSupportFragmentManager().executePendingTransactions();
+        }
+        Fragment active = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (active instanceof MapFragment) {
+            ((MapFragment) active).showFilterDialog();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mapFragment != null && mapFragment.isAdded()) {
+            mapFragment.refreshRequests();
+        }
     }
 }

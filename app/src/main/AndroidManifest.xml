@@ -47,6 +47,7 @@
         <activity android:name=".view.activity.ProfileActivity" />
         <activity android:name=".view.activity.MyRequestsActivity" />
         <activity android:name=".view.activity.MyParticipationsActivity" />
+        <activity android:name=".view.activity.MyChatsActivity" />
         <activity android:name=".view.activity.EvaluationActivity" />
 
     </application>
