@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatingView">
+        <attr name="rv_progressColor" format="color" />
+        <attr name="rv_strokeWidth" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -40,8 +40,8 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
     }
 
     public ParticipationAdapter(List<Participation> data,
-                                OnActionListener actionListener,
-                                OnItemClickListener itemListener) {
+                                 OnActionListener actionListener,
+                                 OnItemClickListener itemListener) {
         this.data = data;
         this.actionListener = actionListener;
         this.itemListener = itemListener;
@@ -77,13 +77,13 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
         holder.tvStatus.setText(statusText);
 
         if (actionListener != null && p.getStatus() == 0) {
-            holder.itemView.findViewById(R.id.btn_approve).setVisibility(View.VISIBLE);
-            holder.itemView.findViewById(R.id.btn_reject).setVisibility(View.VISIBLE);
-            holder.itemView.findViewById(R.id.btn_approve).setOnClickListener(v -> actionListener.onApprove(p));
-            holder.itemView.findViewById(R.id.btn_reject).setOnClickListener(v -> actionListener.onReject(p));
+            holder.btnApprove.setVisibility(View.VISIBLE);
+            holder.btnReject.setVisibility(View.VISIBLE);
+            holder.btnApprove.setOnClickListener(v -> actionListener.onApprove(p));
+            holder.btnReject.setOnClickListener(v -> actionListener.onReject(p));
         } else {
-            holder.itemView.findViewById(R.id.btn_approve).setVisibility(View.GONE);
-            holder.itemView.findViewById(R.id.btn_reject).setVisibility(View.GONE);
+            holder.btnApprove.setVisibility(View.GONE);
+            holder.btnReject.setVisibility(View.GONE);
         }
 
         holder.itemView.setOnClickListener(itemListener == null ? null : v -> itemListener.onItemClick(p));
@@ -96,11 +96,15 @@ public class ParticipationAdapter extends RecyclerView.Adapter<ParticipationAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvSchool, tvStatus;
+        com.google.android.material.button.MaterialButton btnApprove, btnReject;
+
         ViewHolder(View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvSchool = itemView.findViewById(R.id.tv_school);
             tvStatus = itemView.findViewById(R.id.tv_status);
+            btnApprove = itemView.findViewById(R.id.btn_approve);
+            btnReject = itemView.findViewById(R.id.btn_reject);
         }
     }
 }

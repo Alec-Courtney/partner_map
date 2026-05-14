@@ -1,11 +1,10 @@
 package com.androidcourse.partner_map.view.activity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,13 +31,13 @@ public class EvaluationActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(EvaluationViewModel.class);
 
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EvaluationAdapter(data, this::submit);
         recyclerView.setAdapter(adapter);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
         loadData();
     }
 

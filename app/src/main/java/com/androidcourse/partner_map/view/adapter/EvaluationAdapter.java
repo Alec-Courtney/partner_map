@@ -3,7 +3,6 @@ package com.androidcourse.partner_map.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -59,7 +58,7 @@ public class EvaluationAdapter extends RecyclerView.Adapter<EvaluationAdapter.Vi
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTarget;
         RadioGroup rgAttend, rgPraise;
-        Button btnSubmit;
+        com.google.android.material.button.MaterialButton btnSubmit;
 
         ViewHolder(View itemView) {
             super(itemView);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_map"
+        android:icon="@drawable/ic_map_24"
+        android:title="地图" />
+    <item android:id="@+id/nav_list"
+        android:icon="@drawable/ic_view_list_24"
+        android:title="列表" />
+</menu>

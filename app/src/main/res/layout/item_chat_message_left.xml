@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="@dimen/spacing_sm">
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12:00"
-        android:textSize="10sp"
-        android:textColor="@android:color/darker_gray"
+        android:textSize="@dimen/text_size_caption"
+        android:textColor="@color/md_theme_outline"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="@dimen/spacing_xs" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <View
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@android:drawable/ic_menu_myplaces" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/avatar_medium"
+            android:layout_height="@dimen/avatar_medium"
+            android:src="@drawable/ic_person_24"
+            app:shapeAppearance="@style/CircleImage"
+            android:background="@color/md_theme_primaryContainer"
+            android:scaleType="centerInside"
+            android:padding="@dimen/spacing_xs" />
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5"
-            android:padding="10dp"
-            android:layout_marginStart="8dp"
-            android:text="消息内容" />
+            android:background="@drawable/bg_chat_bubble_left"
+            android:paddingHorizontal="@dimen/spacing_md"
+            android:paddingVertical="@dimen/spacing_sm"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:text="消息内容"
+            android:textSize="@dimen/text_size_body"
+            android:textColor="@color/md_theme_onSurface" />
     </LinearLayout>
 </LinearLayout>

@@ -1,196 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/md_theme_surface"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp">
-        <ImageView
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/iv_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:contentDescription="返回" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="个人中心"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="12dp" />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/md_theme_surface"
+            app:navigationIcon="@drawable/ic_arrow_back_24"
+            app:title="个人中心"
+            app:titleTextColor="@color/md_theme_onSurface" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="24dp">
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/ic_menu_myplaces"
-            android:contentDescription="头像" />
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Partner.CardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="昵称"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
-        <TextView
-            android:id="@+id/tv_school"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="学校"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
-    </LinearLayout>
+            android:layout_marginHorizontal="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_md"
+            app:strokeWidth="0dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="@dimen/spacing_xl">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/avatar_large"
+                    android:layout_height="@dimen/avatar_large"
+                    android:src="@drawable/ic_person_24"
+                    app:shapeAppearance="@style/CircleImage"
+                    android:background="@color/md_theme_primaryContainer"
+                    android:scaleType="centerInside"
+                    android:padding="@dimen/spacing_sm" />
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昵称"
+                    android:textSize="@dimen/text_size_headline"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_theme_onSurface"
+                    android:layout_marginTop="@dimen/spacing_sm" />
+
+                <TextView
+                    android:id="@+id/tv_school"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学校"
+                    android:textSize="@dimen/text_size_body"
+                    android:textColor="@color/md_theme_onSurfaceVariant"
+                    android:layout_marginTop="@dimen/spacing_xs" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Partner.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_md"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_lg">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="赴约率"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/md_theme_onSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_attend_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textSize="@dimen/text_size_headline"
+                        android:textStyle="bold"
+                        android:textColor="@color/md_theme_primary" />
+
+                    <RatingBar
+                        android:id="@+id/rating_attend"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:numStars="5"
+                        android:stepSize="0.5"
+                        android:isIndicator="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="好评率"
+                        android:textSize="@dimen/text_size_caption"
+                        android:textColor="@color/md_theme_onSurfaceVariant" />
+
+                    <TextView
+                        android:id="@+id/tv_praise_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textSize="@dimen/text_size_headline"
+                        android:textStyle="bold"
+                        android:textColor="@color/md_theme_primary" />
+
+                    <RatingBar
+                        android:id="@+id/rating_praise"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:numStars="5"
+                        android:stepSize="0.5"
+                        android:isIndicator="true" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Partner.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/spacing_md"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_my_requests"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_menu_item_height"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_lg"
+                    android:background="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_assignment_24"
+                        android:contentDescription="我的需求"
+                        android:layout_marginEnd="@dimen/spacing_md" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的需求"
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/md_theme_onSurface" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right_24"
+                        android:contentDescription="进入" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/spacing_lg"
+                    android:background="@color/md_theme_outlineVariant" />
+
+                <LinearLayout
+                    android:id="@+id/layout_my_participations"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_menu_item_height"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_lg"
+                    android:background="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_handshake_24"
+                        android:contentDescription="我的参与"
+                        android:layout_marginEnd="@dimen/spacing_md" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的参与"
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/md_theme_onSurface" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right_24"
+                        android:contentDescription="进入" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/spacing_lg"
+                    android:background="@color/md_theme_outlineVariant" />
+
+                <LinearLayout
+                    android:id="@+id/layout_my_chats"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_menu_item_height"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_lg"
+                    android:background="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chat_bubble_24"
+                        android:contentDescription="我的私聊"
+                        android:layout_marginEnd="@dimen/spacing_md" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的私聊"
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/md_theme_onSurface" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right_24"
+                        android:contentDescription="进入" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/spacing_lg"
+                    android:background="@color/md_theme_outlineVariant" />
+
+                <LinearLayout
+                    android:id="@+id/layout_evaluations"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_menu_item_height"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_lg"
+                    android:background="?attr/selectableItemBackground">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_star_24"
+                        android:contentDescription="待评价"
+                        android:layout_marginEnd="@dimen/spacing_md" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="待评价"
+                        android:textSize="@dimen/text_size_body"
+                        android:textColor="@color/md_theme_onSurface" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right_24"
+                        android:contentDescription="进入" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:id="@+id/layout_logout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxl"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/spacing_lg"
+            android:layout_marginHorizontal="@dimen/spacing_lg"
+            android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_logout_24"
+                android:contentDescription="退出登录"
+                android:layout_marginEnd="@dimen/spacing_md" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="赴约率" />
-            <TextView
-                android:id="@+id/tv_attend_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0%"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="好评率" />
-            <TextView
-                android:id="@+id/tv_praise_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0%"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:text="退出登录"
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/md_theme_error" />
         </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_my_requests"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:background="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="我的需求" />
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="进入" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_my_participations"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:background="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="我的参与" />
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="进入" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_my_chats"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:background="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="我的私聊" />
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="进入" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_evaluations"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:background="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="待评价" />
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_more"
-            android:contentDescription="进入" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_logout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
-        android:background="?attr/selectableItemBackground">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="退出登录"
-            android:textColor="@android:color/holo_red_dark" />
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>

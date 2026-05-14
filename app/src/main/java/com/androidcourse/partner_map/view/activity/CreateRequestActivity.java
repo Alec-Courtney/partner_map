@@ -7,10 +7,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -87,7 +88,7 @@ public class CreateRequestActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         etTitle = findViewById(R.id.et_title);
         etDescription = findViewById(R.id.et_description);
         etCost = findViewById(R.id.et_cost);
@@ -99,7 +100,7 @@ public class CreateRequestActivity extends AppCompatActivity {
         rgGender = findViewById(R.id.rg_gender);
         btnPublish = findViewById(R.id.btn_publish);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void bindActions() {

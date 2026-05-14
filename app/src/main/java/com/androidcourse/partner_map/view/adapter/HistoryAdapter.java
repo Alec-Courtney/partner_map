@@ -3,7 +3,6 @@ package com.androidcourse.partner_map.view.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +46,23 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         PartnerRequest item = data.get(position);
         holder.ivCategory.setImageResource(CategoryHelper.getIconRes(item.getCategory()));
         holder.tvTitle.setText(item.getTitle());
-        holder.tvStatus.setText(CategoryHelper.getStatusLabel(item.getStatus()));
+
+        String statusLabel = CategoryHelper.getStatusLabel(item.getStatus());
+        holder.tvStatus.setText(statusLabel);
+        int statusDrawable;
+        switch (item.getStatus()) {
+            case 0:
+                statusDrawable = R.drawable.bg_status_recruiting;
+                break;
+            case 1:
+                statusDrawable = R.drawable.bg_status_full;
+                break;
+            default:
+                statusDrawable = R.drawable.bg_status_ended;
+                break;
+        }
+        holder.tvStatus.setBackgroundResource(statusDrawable);
+
         holder.tvTime.setText(TimeUtil.formatDateTime(item.getScheduledTime()));
         holder.tvPeople.setText(item.getCurrentParticipants() + "/" + item.getMaxParticipants());
 
@@ -85,7 +100,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivCategory;
         TextView tvTitle, tvStatus, tvTime, tvPeople;
-        Button btnAction1, btnAction2;
+        com.google.android.material.button.MaterialButton btnAction1, btnAction2;
 
         ViewHolder(View itemView) {
             super(itemView);

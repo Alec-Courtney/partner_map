@@ -2,8 +2,9 @@ package com.androidcourse.partner_map.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,7 +31,7 @@ public class MyRequestsActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(MyRequestsViewModel.class);
 
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new HistoryAdapter(data, true, new HistoryAdapter.OnActionListener() {
@@ -70,7 +71,7 @@ public class MyRequestsActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
         loadData();
     }
 

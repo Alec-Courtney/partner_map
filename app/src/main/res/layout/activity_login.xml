@@ -1,48 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="32dp"
+    android:padding="@dimen/spacing_xl"
+    android:background="@color/md_theme_surface"
     android:fitsSystemWindows="true">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/avatar_large"
+        android:layout_height="@dimen/avatar_large"
+        android:layout_marginBottom="@dimen/spacing_lg"
+        android:src="@drawable/ic_handshake_24"
+        app:shapeAppearance="@style/CircleImage"
+        android:background="@color/md_theme_primaryContainer"
+        android:scaleType="centerInside"
+        android:padding="@dimen/spacing_lg" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="搭子地图"
-        android:textSize="32sp"
+        android:text="@string/app_name"
+        android:textSize="@dimen/text_size_display"
         android:textStyle="bold"
-        android:layout_marginBottom="48dp" />
+        android:textColor="@color/md_theme_primary"
+        android:layout_marginBottom="@dimen/spacing_xxl" />
 
-    <EditText
-        android:id="@+id/et_nickname"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Partner.TextInputLayout.Outlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_md"
         android:hint="昵称"
-        android:inputType="text"
-        android:layout_marginBottom="16dp" />
+        app:startIconDrawable="@drawable/ic_person_24">
 
-    <EditText
-        android:id="@+id/et_password"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Partner.TextInputLayout.Outlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_xl"
         android:hint="密码"
-        android:inputType="textPassword"
-        android:layout_marginBottom="32dp" />
+        app:endIconMode="password_toggle">
 
-    <Button
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
+        style="@style/Widget.Partner.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登 录"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="@dimen/spacing_md" />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tv_register"
+        style="@style/Widget.Partner.Button.Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="还没有账号？去注册"
-        android:textColor="@android:color/holo_blue_dark" />
+        android:textColor="@color/md_theme_primary" />
 
 </LinearLayout>

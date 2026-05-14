@@ -41,7 +41,24 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
         PartnerRequest item = data.get(position);
         holder.ivCategory.setImageResource(CategoryHelper.getIconRes(item.getCategory()));
         holder.tvTitle.setText(item.getTitle());
-        holder.tvLocation.setText(TimeUtil.formatDistanceMeters(item.getDistanceMeters()) + " · " + CategoryHelper.getStatusLabel(item.getStatus()));
+
+        String statusLabel = CategoryHelper.getStatusLabel(item.getStatus());
+        int statusDrawable;
+        switch (item.getStatus()) {
+            case 0:
+                statusDrawable = R.drawable.bg_status_recruiting;
+                break;
+            case 1:
+                statusDrawable = R.drawable.bg_status_full;
+                break;
+            default:
+                statusDrawable = R.drawable.bg_status_ended;
+                break;
+        }
+        holder.tvStatus.setText(statusLabel);
+        holder.tvStatus.setBackgroundResource(statusDrawable);
+
+        holder.tvLocation.setText(TimeUtil.formatDistanceMeters(item.getDistanceMeters()) + " · " + CategoryHelper.getLabel(item.getCategory()));
         holder.tvTime.setText(TimeUtil.formatScheduledRelative(item.getScheduledTime()) + " · 余" + (item.getMaxParticipants() - item.getCurrentParticipants()) + "人");
         holder.itemView.setOnClickListener(v -> listener.onItemClick(item));
     }
@@ -53,7 +70,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivCategory;
-        TextView tvTitle, tvLocation, tvTime;
+        TextView tvTitle, tvLocation, tvTime, tvStatus;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -61,6 +78,7 @@ public class RequestListAdapter extends RecyclerView.Adapter<RequestListAdapter.
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvLocation = itemView.findViewById(R.id.tv_location);
             tvTime = itemView.findViewById(R.id.tv_time);
+            tvStatus = itemView.findViewById(R.id.tv_status);
         }
     }
 }

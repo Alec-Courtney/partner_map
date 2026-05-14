@@ -1,84 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/toolbar_height"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="@dimen/spacing_lg"
+        android:background="@color/md_theme_surface"
+        android:elevation="4dp">
 
         <ImageView
             android:id="@+id/iv_filter"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_search"
-            android:contentDescription="筛选" />
+            android:src="@drawable/ic_filter_list_24"
+            android:contentDescription="筛选"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/spacing_xs" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="搭子地图"
-            android:textSize="18sp"
+            android:text="@string/app_name"
+            android:textSize="@dimen/text_size_title"
             android:textStyle="bold"
+            android:textColor="@color/md_theme_onSurface"
             android:gravity="center" />
 
         <ImageView
             android:id="@+id/iv_profile"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_myplaces"
-            android:contentDescription="我的" />
+            android:src="@drawable/ic_person_24"
+            android:contentDescription="我的"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/spacing_xs" />
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_bar"
-        android:layout_below="@id/top_bar" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <LinearLayout
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/tv_tab_map"
-            android:layout_width="0dp"
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/bottom_nav_height" />
+
+        <LinearLayout
+            android:id="@+id/bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_nav_height"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="地图"
-            android:background="?attr/selectableItemBackground" />
+            android:background="@color/md_theme_surface"
+            android:elevation="8dp">
 
-        <TextView
-            android:id="@+id/tv_tab_list"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="列表"
-            android:background="?attr/selectableItemBackground" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_tab_map"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/bottom_nav_tab_padding_top"
+                android:text="地图"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                android:drawableTop="@drawable/ic_map_24"
+                android:drawablePadding="@dimen/spacing_xs"
+                android:background="?attr/selectableItemBackground" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@id/bottom_bar"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_input_add"
-        android:contentDescription="发布需求" />
+            <TextView
+                android:id="@+id/tv_tab_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="@dimen/bottom_nav_tab_padding_top"
+                android:text="列表"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                android:drawableTop="@drawable/ic_view_list_24"
+                android:drawablePadding="@dimen/spacing_xs"
+                android:background="?attr/selectableItemBackground" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="@dimen/spacing_lg"
+            android:layout_marginBottom="@dimen/home_fab_bottom_margin"
+            android:src="@drawable/ic_add_24"
+            android:contentDescription="发布需求" />
+    </FrameLayout>
+
+</LinearLayout>

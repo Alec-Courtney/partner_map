@@ -1,65 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/md_theme_surface">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="@dimen/spacing_xl">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="分类"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textSize="@dimen/text_size_subtitle"
+            android:textColor="@color/md_theme_onSurface"
+            android:layout_marginBottom="@dimen/spacing_sm" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_xs">
+
             <TextView
                 android:id="@+id/btn_cat_all"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="全部"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_cat_study"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="学习"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_cat_sport"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="运动"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_cat_food"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="美食"
-                android:textSize="12sp"
-                android:background="#E0E0E0" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,37 +79,44 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="4dp">
+            android:layout_marginBottom="@dimen/spacing_lg">
+
             <TextView
                 android:id="@+id/btn_cat_travel"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="出行"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_cat_fun"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="娱乐"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_cat_shopping"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="购物"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -109,32 +128,38 @@
             android:layout_height="wrap_content"
             android:text="学校"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="@dimen/text_size_subtitle"
+            android:textColor="@color/md_theme_onSurface"
+            android:layout_marginBottom="@dimen/spacing_sm" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_lg">
+
             <TextView
                 android:id="@+id/btn_school_all"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="全部学校"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_school_mine"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="仅本校"
-                android:textSize="12sp"
-                android:background="#E0E0E0" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip" />
         </LinearLayout>
 
         <TextView
@@ -142,52 +167,62 @@
             android:layout_height="wrap_content"
             android:text="距离"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            android:textSize="@dimen/text_size_subtitle"
+            android:textColor="@color/md_theme_onSurface"
+            android:layout_marginBottom="@dimen/spacing_sm" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_lg">
+
             <TextView
                 android:id="@+id/btn_dist_5"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="5km"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_dist_10"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="10km"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_dist_20"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="20km"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
             <TextView
                 android:id="@+id/btn_dist_all"
                 android:layout_width="0dp"
-                android:layout_height="36dp"
+                android:layout_height="@dimen/spacing_xxl"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="不限"
-                android:textSize="12sp"
-                android:background="#E0E0E0" />
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip" />
         </LinearLayout>
 
         <TextView
@@ -195,72 +230,85 @@
             android:layout_height="wrap_content"
             android:text="时间"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/btn_time_today"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="今天"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
-            <TextView
-                android:id="@+id/btn_time_week"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="本周"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
-            <TextView
-                android:id="@+id/btn_time_month"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="本月"
-                android:textSize="12sp"
-                android:background="#E0E0E0"
-                android:layout_marginEnd="4dp" />
-            <TextView
-                android:id="@+id/btn_time_all"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="不限"
-                android:textSize="12sp"
-                android:background="#E0E0E0" />
-        </LinearLayout>
+            android:textSize="@dimen/text_size_subtitle"
+            android:textColor="@color/md_theme_onSurface"
+            android:layout_marginBottom="@dimen/spacing_sm" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="24dp">
-            <Button
+            android:layout_marginBottom="@dimen/spacing_xl">
+
+            <TextView
+                android:id="@+id/btn_time_today"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xxl"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="今天"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
+            <TextView
+                android:id="@+id/btn_time_week"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xxl"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="本周"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
+            <TextView
+                android:id="@+id/btn_time_month"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xxl"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="本月"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip"
+                android:layout_marginEnd="@dimen/spacing_xs" />
+
+            <TextView
+                android:id="@+id/btn_time_all"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xxl"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="不限"
+                android:textSize="@dimen/text_size_caption"
+                android:textColor="@color/chip_unselected_text"
+                android:background="@drawable/bg_filter_chip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_reset"
+                style="@style/Widget.Partner.Button.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="重置" />
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_confirm"
+                style="@style/Widget.Partner.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="确认"
-                android:layout_marginStart="16dp" />
+                android:layout_marginStart="@dimen/spacing_lg"
+                android:text="确认" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

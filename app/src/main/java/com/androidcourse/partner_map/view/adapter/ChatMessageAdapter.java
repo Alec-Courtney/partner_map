@@ -64,6 +64,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     static class LeftViewHolder extends RecyclerView.ViewHolder {
         TextView tvContent, tvTime;
+
         LeftViewHolder(View itemView) {
             super(itemView);
             tvContent = itemView.findViewById(R.id.tv_content);
@@ -73,6 +74,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     static class RightViewHolder extends RecyclerView.ViewHolder {
         TextView tvContent, tvTime;
+
         RightViewHolder(View itemView) {
             super(itemView);
             tvContent = itemView.findViewById(R.id.tv_content);

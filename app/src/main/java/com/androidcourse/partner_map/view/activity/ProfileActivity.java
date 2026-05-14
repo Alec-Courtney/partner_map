@@ -7,6 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         ivAvatar = findViewById(R.id.iv_avatar);
         tvNickname = findViewById(R.id.tv_nickname);
         tvSchool = findViewById(R.id.tv_school);
@@ -39,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         LinearLayout layoutEvaluations = findViewById(R.id.layout_evaluations);
         LinearLayout layoutLogout = findViewById(R.id.layout_logout);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
         layoutMyRequests.setOnClickListener(v -> startActivity(new Intent(this, MyRequestsActivity.class)));
         layoutMyParticipations.setOnClickListener(v -> startActivity(new Intent(this, MyParticipationsActivity.class)));
         layoutMyChats.setOnClickListener(v -> startActivity(new Intent(this, MyChatsActivity.class)));

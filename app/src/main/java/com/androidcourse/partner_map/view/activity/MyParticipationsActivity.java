@@ -2,7 +2,7 @@ package com.androidcourse.partner_map.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,7 +29,7 @@ public class MyParticipationsActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(MyParticipationsViewModel.class);
 
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ParticipationAdapter(data, participation -> {
@@ -39,7 +39,7 @@ public class MyParticipationsActivity extends AppCompatActivity {
         });
         recyclerView.setAdapter(adapter);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
         loadData();
     }
 

@@ -2,12 +2,13 @@ package com.androidcourse.partner_map.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -43,7 +44,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView tvTitle;
     private TextView tvRequestStatus;
     private LinearLayout layoutRequestAction;
-    private Button btnApplyJoin;
+    private MaterialButton btnApplyJoin;
     private ChatMessageAdapter adapter;
     private final List<ChatMessage> messages = new ArrayList<>();
     private String roomId;
@@ -89,16 +90,16 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         tvTitle = findViewById(R.id.tv_title);
         tvRequestStatus = findViewById(R.id.tv_request_status);
         layoutRequestAction = findViewById(R.id.layout_request_action);
         btnApplyJoin = findViewById(R.id.btn_apply_join);
         rvMessages = findViewById(R.id.rv_messages);
         etInput = findViewById(R.id.et_input);
-        Button btnSend = findViewById(R.id.btn_send);
+        MaterialButton btnSend = findViewById(R.id.btn_send);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
         btnSend.setOnClickListener(v -> sendMessage());
         btnApplyJoin.setOnClickListener(v -> applyJoin());
 

@@ -2,8 +2,9 @@ package com.androidcourse.partner_map.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,13 +35,13 @@ public class MyChatsActivity extends AppCompatActivity {
         currentUserId = SharedPreferencesUtil.getInstance(this).getString(Constants.KEY_USER_ID, "");
         viewModel = new ViewModelProvider(this).get(MyChatsViewModel.class);
 
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChatRoomAdapter(data, currentUserId, this::openChatRoom);
         recyclerView.setAdapter(adapter);
 
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     @Override

@@ -2,12 +2,11 @@ package com.androidcourse.partner_map.view.fragment;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.amap.api.maps2d.AMap;
+import com.amap.api.maps2d.AMapOptions;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
@@ -45,7 +45,7 @@ public class MapFragment extends Fragment {
     private MapViewModel viewModel;
     private MapView mapView;
     private AMap aMap;
-    private LinearLayout cardPreview;
+    private View cardPreview;
     private TextView tvCardTitle, tvCardLocation, tvCardTime;
     private List<PartnerRequest> currentRequests = new ArrayList<>();
     private PartnerRequest selectedRequest;
@@ -88,6 +88,8 @@ public class MapFragment extends Fragment {
     private void initMap() {
         aMap = mapView.getMap();
         aMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        aMap.getUiSettings().setZoomControlsEnabled(true);
+        aMap.getUiSettings().setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);
 
         MyLocationStyle myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER);
@@ -207,7 +209,6 @@ public class MapFragment extends Fragment {
         View.OnClickListener catClick = v -> {
             resetCategoryButtons(view);
             v.setSelected(true);
-            v.setBackgroundColor(Color.parseColor("#2196F3"));
             int id = v.getId();
             if (id == R.id.btn_cat_all) selectedCategoryIdx[0] = -1;
             else if (id == R.id.btn_cat_study) selectedCategoryIdx[0] = 0;
@@ -229,16 +230,9 @@ public class MapFragment extends Fragment {
         View btnAllSchool = view.findViewById(R.id.btn_school_all);
         View btnMySchool = view.findViewById(R.id.btn_school_mine);
         View.OnClickListener schoolClick = v -> {
-            if (btnAllSchool != null) {
-                btnAllSchool.setSelected(false);
-                btnAllSchool.setBackgroundColor(Color.parseColor("#E0E0E0"));
-            }
-            if (btnMySchool != null) {
-                btnMySchool.setSelected(false);
-                btnMySchool.setBackgroundColor(Color.parseColor("#E0E0E0"));
-            }
+            if (btnAllSchool != null) btnAllSchool.setSelected(false);
+            if (btnMySchool != null) btnMySchool.setSelected(false);
             v.setSelected(true);
-            v.setBackgroundColor(Color.parseColor("#2196F3"));
             selectedSchoolIdx[0] = (v.getId() == R.id.btn_school_mine) ? 1 : 0;
         };
         if (btnAllSchool != null) btnAllSchool.setOnClickListener(schoolClick);
@@ -251,7 +245,6 @@ public class MapFragment extends Fragment {
         View.OnClickListener distClick = v -> {
             resetDistButtons(view);
             v.setSelected(true);
-            v.setBackgroundColor(Color.parseColor("#2196F3"));
             int id = v.getId();
             if (id == R.id.btn_dist_5) { selectedRadiusIdx[0] = 0; }
             else if (id == R.id.btn_dist_10) { selectedRadiusIdx[0] = 1; }
@@ -270,7 +263,6 @@ public class MapFragment extends Fragment {
         View.OnClickListener timeClick = v -> {
             resetTimeButtons(view);
             v.setSelected(true);
-            v.setBackgroundColor(Color.parseColor("#2196F3"));
             int id = v.getId();
             if (id == R.id.btn_time_today) selectedTimeIdx[0] = 0;
             else if (id == R.id.btn_time_week) selectedTimeIdx[0] = 1;
@@ -318,7 +310,6 @@ public class MapFragment extends Fragment {
             View v = root.findViewById(id);
             if (v != null) {
                 v.setSelected(false);
-                v.setBackgroundColor(Color.parseColor("#E0E0E0"));
             }
         }
     }
@@ -329,7 +320,6 @@ public class MapFragment extends Fragment {
             View v = root.findViewById(id);
             if (v != null) {
                 v.setSelected(false);
-                v.setBackgroundColor(Color.parseColor("#E0E0E0"));
             }
         }
     }
@@ -340,7 +330,6 @@ public class MapFragment extends Fragment {
             View v = root.findViewById(id);
             if (v != null) {
                 v.setSelected(false);
-                v.setBackgroundColor(Color.parseColor("#E0E0E0"));
             }
         }
     }

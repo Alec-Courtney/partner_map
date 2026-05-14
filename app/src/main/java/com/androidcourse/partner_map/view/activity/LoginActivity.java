@@ -2,10 +2,10 @@ package com.androidcourse.partner_map.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,11 +34,11 @@ public class LoginActivity extends AppCompatActivity {
 
         etNickname = findViewById(R.id.et_nickname);
         etPassword = findViewById(R.id.et_password);
-        Button btnLogin = findViewById(R.id.btn_login);
-        TextView tvRegister = findViewById(R.id.tv_register);
+        MaterialButton btnLogin = findViewById(R.id.btn_login);
+        MaterialButton btnRegister = findViewById(R.id.tv_register);
 
         btnLogin.setOnClickListener(v -> doLogin());
-        tvRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
+        btnRegister.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
     }
 
     private void restoreTokenAndStartMain() {

@@ -1,3 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">搭子地图</string>
+
+    <string-array name="category_labels">
+        <item>学习</item>
+        <item>运动</item>
+        <item>美食</item>
+        <item>出行</item>
+        <item>娱乐</item>
+        <item>购物</item>
+    </string-array>
 </resources>

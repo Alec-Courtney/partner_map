@@ -1,197 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
+    android:orientation="vertical"
+    android:background="@color/md_theme_surface"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/iv_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/md_theme_surface"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:title="发布搭子需求"
+        app:titleTextColor="@color/md_theme_onSurface" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/spacing_lg">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:contentDescription="返回" />
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="标题*">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="描述*">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发布搭子需求"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginStart="12dp" />
-        </LinearLayout>
+                android:text="分类*"
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                android:layout_marginBottom="@dimen/spacing_xs" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="标题*"
-            android:textSize="13sp" />
-        <EditText
-            android:id="@+id/et_title"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginBottom="6dp" />
+            <com.androidcourse.partner_map.view.widget.CategoryPicker
+                android:id="@+id/category_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="描述*"
-            android:textSize="13sp" />
-        <EditText
-            android:id="@+id/et_description"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:gravity="top"
-            android:layout_marginBottom="6dp" />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="需求位置*"
+                app:startIconDrawable="@drawable/ic_location_on_24">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="分类*"
-            android:textSize="13sp" />
-        <com.androidcourse.partner_map.view.widget.CategoryPicker
-            android:id="@+id/category_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_request_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:text="点击选择位置" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="需求位置*"
-            android:textSize="13sp" />
-        <TextView
-            android:id="@+id/tv_request_location"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#F5F5F5"
-            android:gravity="center"
-            android:text="点击选择位置"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="人数上限*"
-            android:textSize="13sp" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="6dp">
-            <ImageView
-                android:id="@+id/iv_minus"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@android:drawable/btn_minus"
-                android:contentDescription="减少" />
             <TextView
-                android:id="@+id/tv_max_participants"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="16sp"
-                android:gravity="center" />
-            <ImageView
-                android:id="@+id/iv_plus"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@android:drawable/ic_input_add"
-                android:contentDescription="增加" />
+                android:text="人数上限*"
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                android:layout_marginBottom="@dimen/spacing_xs" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/spacing_md">
+
+                <ImageView
+                    android:id="@+id/iv_minus"
+                    android:layout_width="@dimen/quantity_button_size"
+                    android:layout_height="@dimen/quantity_button_size"
+                    android:src="@drawable/ic_remove_24"
+                    android:contentDescription="减少"
+                    android:background="@drawable/bg_input_rounded"
+                    android:padding="@dimen/spacing_sm"
+                    android:tint="@color/md_theme_primary" />
+
+                <TextView
+                    android:id="@+id/tv_max_participants"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_sm"
+                    android:text="1"
+                    android:textSize="@dimen/text_size_subtitle"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/md_theme_onSurface" />
+
+                <ImageView
+                    android:id="@+id/iv_plus"
+                    android:layout_width="@dimen/quantity_button_size"
+                    android:layout_height="@dimen/quantity_button_size"
+                    android:src="@drawable/ic_add_24"
+                    android:contentDescription="增加"
+                    android:background="@drawable/bg_input_rounded"
+                    android:padding="@dimen/spacing_sm"
+                    android:tint="@color/md_theme_primary" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="预定时间*"
+                app:startIconDrawable="@drawable/ic_schedule_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_scheduled_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:text="点击选择日期和时间" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_md"
+                android:hint="失效提前量*"
+                app:startIconDrawable="@drawable/ic_schedule_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tv_expire_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:text="1小时" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="性别要求"
+                android:textSize="@dimen/text_size_body"
+                android:textColor="@color/md_theme_onSurfaceVariant"
+                android:layout_marginBottom="@dimen/spacing_xs" />
+
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_md">
+                <RadioButton
+                    android:id="@+id/rb_any"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="不限"
+                    android:checked="true"
+                    android:layout_marginEnd="@dimen/spacing_md" />
+                <RadioButton
+                    android:id="@+id/rb_male_only"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="仅男"
+                    android:layout_marginEnd="@dimen/spacing_md" />
+                <RadioButton
+                    android:id="@+id/rb_female_only"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="仅女" />
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Partner.TextInputLayout.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_xl"
+                android:hint="消费说明"
+                app:expandedHintEnabled="false"
+                app:placeholderText="费用分摊或预估消费"
+                app:startIconDrawable="@drawable/ic_payments_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_publish"
+                style="@style/Widget.Partner.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发 布" />
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="预定时间*"
-            android:textSize="13sp" />
-        <TextView
-            android:id="@+id/tv_scheduled_time"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#F5F5F5"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="12dp"
-            android:text="点击选择日期和时间"
-            android:textSize="13sp"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="失效提前量*"
-            android:textSize="13sp" />
-        <TextView
-            android:id="@+id/tv_expire_time"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="#F5F5F5"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="12dp"
-            android:text="1小时"
-            android:textSize="13sp"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="性别要求"
-            android:textSize="13sp" />
-        <RadioGroup
-            android:id="@+id/rg_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
-            <RadioButton
-                android:id="@+id/rb_any"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="不限"
-                android:textSize="13sp"
-                android:checked="true" />
-            <RadioButton
-                android:id="@+id/rb_male_only"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="仅男"
-                android:textSize="13sp" />
-            <RadioButton
-                android:id="@+id/rb_female_only"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="仅女"
-                android:textSize="13sp" />
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="消费说明"
-            android:textSize="13sp" />
-        <EditText
-            android:id="@+id/et_cost"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:hint="费用分摊或预估消费"
-            android:textSize="13sp"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btn_publish"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:text="发 布" />
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

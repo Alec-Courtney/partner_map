@@ -3,11 +3,12 @@ package com.androidcourse.partner_map.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -43,8 +44,8 @@ public class RequestDetailActivity extends AppCompatActivity {
     private TextView tvCost;
     private TextView tvDesc;
     private TextView tvPendingTitle;
-    private Button btnPrimaryAction;
-    private Button btnSecondaryAction;
+    private MaterialButton btnPrimaryAction;
+    private MaterialButton btnSecondaryAction;
     private LinearLayout layoutPublisherActions;
     private RecyclerView rvPendingParticipations;
     private String requestId;
@@ -77,7 +78,7 @@ public class RequestDetailActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
-        ImageView ivBack = findViewById(R.id.iv_back);
+        MaterialToolbar toolbar = findViewById(R.id.iv_back);
         tvCategory = findViewById(R.id.tv_category);
         tvTitle = findViewById(R.id.tv_title);
         tvLocation = findViewById(R.id.tv_location);
@@ -134,7 +135,7 @@ public class RequestDetailActivity extends AppCompatActivity {
 
         rvParticipants.setAdapter(participantsAdapter);
         rvPendingParticipations.setAdapter(pendingAdapter);
-        ivBack.setOnClickListener(v -> finish());
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void bindActions() {
